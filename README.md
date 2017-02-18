@@ -1,5 +1,14 @@
 # Workshop Lab README
 This folder contains setup instructions to set up ahead of my microservices workshop labs.
+If you are just looking to learn how to set up an environment on any of the below platforms, you can also feel free to follow these setup steps but the labs themselves are only shared with attendees.
+
+```
+NEXT WORKSHOP: NDCMINI COPENHAGEN
+
+JOIN US!
+
+http://cph.ndcmini.com/speaker/michele-bustamante/
+```
 
 There are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
