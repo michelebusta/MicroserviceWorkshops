@@ -39,4 +39,6 @@ The goal is to show similar deployments of a simple web app / api to a container
 4. Work with load balancing, service discovery
 5. Work with load testing, monitoring, scale out
 
-
+## Bit.ly links to lab starter files
+ContosoEvents: http://bit.ly/2liKtvq
+FabMedical: http://bit.ly/2lWzQS2
