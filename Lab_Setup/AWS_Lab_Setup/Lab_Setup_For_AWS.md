@@ -43,7 +43,11 @@ The hackathon will make use of several tools and services.  Here is a list of re
 
 **Duration:** 20-30 minutes
 
-1. Go to the account signup page: <https://www.amazon.com/ap/signin>
+1. Go to the account signup page: <https://aws.amazon.com>
+If you are new to this site it will show a button in the header "Create AWS Account", click this.
+If you hav been here before it will how a button in the header "Sign In to the Console", click this.
+
+To create your account (assuming you don't have one):
 
     * Enter email or mobile number.
     * Choose “I am a new user.”
