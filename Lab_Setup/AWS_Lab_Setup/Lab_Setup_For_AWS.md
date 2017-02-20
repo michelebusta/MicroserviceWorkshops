@@ -415,7 +415,7 @@ In this section, you will validate that you can connect to the new build agent V
 
     Use the private key name such as “fabmedical\_rsa”, the username for the VM such as “ubuntu”, and the IP address for the build agent VM.
 
-    `$ ssh -i fabmedical\_rsa ubuntu@54.202.82.171`
+    `$ ssh -i fabmedical_rsa ubuntu@54.202.82.171`
 
 5.  You will be asked to confirm if you want to connect, as the authenticity of the connection cannot be validated. Type “yes”.
 
