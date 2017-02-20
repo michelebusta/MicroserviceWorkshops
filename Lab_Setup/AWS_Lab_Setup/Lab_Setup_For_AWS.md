@@ -49,11 +49,11 @@ If you hav been here before it will how a button in the header "Sign In to the C
 
 To create your account (assuming you don't have one):
 
-    * Enter email or mobile number.
-    * Choose “I am a new user.”
-	* Click “Sign in using our secure server”
+* Enter email or mobile number.
+* Choose “I am a new user.”
+* Click “Sign in using our secure server”
 
-    ![AWS Sign In](images/image1.jpg)
+![AWS Sign In](images/image1.jpg)
 
 2. Enter your name, and retype your email address. Choose a password.
 
