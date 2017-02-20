@@ -411,7 +411,7 @@ In this section, you will validate that you can connect to the new build agent V
 
 4.  Connect to the new VM you created by typing the following command.
 
-    `ssh -i \[PRIVATEKEYNAME\] \[BUILDAGENTUSERNAME\]@\[BUILDAGENTIP\]`
+    `ssh -i [PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
 
     Use the private key name such as “fabmedical\_rsa”, the username for the VM such as “ubuntu”, and the IP address for the build agent VM.
 
