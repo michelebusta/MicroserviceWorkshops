@@ -368,7 +368,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
 5. The Resource Group is created
 
-   ![Resource Group Created](images/RG4.jpg)
+   ![Resource Group Created](images/RG4.png)
 
 ## Task 6: Add Resource tag to the Security Group
 
