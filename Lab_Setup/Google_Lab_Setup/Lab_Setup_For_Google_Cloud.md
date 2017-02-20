@@ -18,6 +18,7 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 
 #Preparation Steps in this Document
+**WARNING: depending on the region you are in, Google may require you verify your credit card and identification before you can use the account, this does not always happend but I just discovered this while creating a new account...so do this early if you really want to use Google for the lab on Wed/Thurs this week!**
 
 **Create your Google Cloud Account and Setup Kubectl (30-40 minutes) **
 * Task 1: Create a Google Cloud Account 
