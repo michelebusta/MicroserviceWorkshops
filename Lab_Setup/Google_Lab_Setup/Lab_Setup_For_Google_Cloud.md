@@ -371,7 +371,7 @@ You will be installing Docker to this VM once it is set up and you will use this
 
 4.  Open the public key that you generated, in notepad.
 
-    `notepad fabmedical.pub`
+    `notepad fabmedical_rsa.pub`
      
     ![](images/ex0-image21.png)
 
@@ -414,9 +414,9 @@ agent VM.
 
     `ssh -i \[PRIVATEKEYNAME\] \[BUILDAGENTUSERNAME\]@\[BUILDAGENTIP\]`
 
-    Use the private key name such as “fabmedical”, the username for the VM “ubuntu”, and the IP address for the build agent VM.
+    Use the private key name such as “fabmedical_rsa”, the username for the VM “ubuntu”, and the IP address for the build agent VM.
 
-    `ssh -i fabmedical ubuntu@13.68.113.176`
+    `ssh -i fabmedical_rsa ubuntu@13.68.113.176`
 
 5.  You will be asked to confirm if you want to connect, as the
     authenticity of the connection cannot be validated. Type “yes”.
@@ -443,7 +443,7 @@ In this task, you will update the packages and install Docker engine.
 2.  Update the Ubuntu packages and install Docker engine, curl, node.js and the node package manager in a single step by typing the
 following in a single line command.
 
-    `sudo apt-get update && sudo apt-get –y install docker.io curl nodejs npm`
+    `sudo apt-get update && sudo apt-get install docker.io curl nodejs npm`
 
 3.  When the command has completed, check the Docker version installed
  by executing this command. The output may look something like that
