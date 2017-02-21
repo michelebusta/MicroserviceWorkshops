@@ -3,6 +3,8 @@ This document describes all of the preparation you should take care of prior to 
 If you do not have time, you may work on this during the workshop but may not complete as many lab steps
 during lab times and can work on your own time to complete the lab at your leisure.
 
++**WARNING: depending on the region you are in, Google may require you verify your credit card and identification before you can use the account, this does not always happend but I just discovered this while creating a new account...so do this early if you really want to use Google for the lab on Wed/Thurs this week!**
+
 #Prerequisites
 The lab will make use of several tools and services.  Here is a list of requirements that you will need to successfully complete the lab.  If you are missing any of these requirements, we will cover the steps to satisfy them in this document.
 
@@ -18,7 +20,6 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 
 #Preparation Steps in this Document
-**WARNING: depending on the region you are in, Google may require you verify your credit card and identification before you can use the account, this does not always happend but I just discovered this while creating a new account...so do this early if you really want to use Google for the lab on Wed/Thurs this week!**
 
 **Create your Google Cloud Account and Setup Kubectl (30-40 minutes) **
 * Task 1: Create a Google Cloud Account 
@@ -244,7 +245,7 @@ Follow the instructions for your platform. The next two sections describes mac t
 
     Ignore this warning. 
 
-5. The container engine API shows a "Diable" button, indicating that it is therefore enabled.
+5. The container engine API shows a "Disable" button, indicating that it is therefore enabled.
 
     ![Disable button](images/Google-Container-engine-4a.png)
     

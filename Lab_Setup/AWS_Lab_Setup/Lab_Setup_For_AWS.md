@@ -4,7 +4,7 @@ If you do not have time, you may work on this during the workshop but may not co
 during lab times and can work on your own time to complete the lab at your leisure.
 
 # Prerequisites
-The hackathon will make use of several tools and services.  Here is a list of requirements that you will need to successfully complete the hackathon.  If you are missing any of these requirements, we will cover the steps to satisfy them in this document.
+The lab will make use of several tools and services.  Here is a list of requirements that you will need to successfully complete the lab.  If you are missing any of these requirements, we will cover the steps to satisfy them in this document.
 
 * An internet connection.
 * Amazon Web Services Account.
@@ -13,7 +13,7 @@ The hackathon will make use of several tools and services.  Here is a list of re
 * A DockerHub account
 	* You will need an email address
 * A browser, preferably Chrome for consistency with this guide.
-* A command prompt (come commands will work in windows CMD but for consistency we will use bash by default).
+* A command prompt (some commands will work in windows CMD but for consistency we will use bash by default).
 	* You will need openssh at a minimum
 	* You will need the aws cli 
 
@@ -30,12 +30,13 @@ The hackathon will make use of several tools and services.  Here is a list of re
 * Task 2: Create an SSH key
 * Task 3: Upload public key to EC2
 * Task 4: Create a build agent VM
-* Task 5: Add Resource tag to the Security Group
-* Task 6: Connect securely to the build agent
-* Task 7: Complete the build agent setup
-* Task 8: Create a Docker Hub account 
-* Task 9: Create an EC2 Container Service cluster
-* Task 10: Cleanup sample app
+* Task 5: Create an AWS Resource Group
+* Task 6: Add Resource tag to the Security Group
+* Task 7: Connect securely to the build agent
+* Task 8: Complete the build agent setup
+* Task 9: Create a Docker Hub account 
+* Task 10: Create an EC2 Container Service cluster
+* Task 11: Cleanup sample app
 
 #Create an AWS Account
 
@@ -45,31 +46,31 @@ The hackathon will make use of several tools and services.  Here is a list of re
 
 1. Go to the account signup page: <https://aws.amazon.com>
 
- * If you are new to this site it will show a button in the header "Create AWS Account", click this.
- * If you have been here before it will how a button in the header "Sign In to the Console", click this.
+    * If you are new to this site it will show a button in the header "Create AWS Account", click this.
+    * If you have been here before it will how a button in the header "Sign In to the Console", click this.
 
-To create your account (assuming you don't have one):
+    To create your account (assuming you don't have one):
 
-* Enter email or mobile number.
-* Choose “I am a new user.”
-* Click “Sign in using our secure server”
+    * Enter email or mobile number.
+    * Choose “I am a new user.”
+    * Click “Sign in using our secure server”
 
-![AWS Sign In](images/image1.jpg)
+    ![AWS Sign In](images/image1.jpg)
 
 2. Enter your name, and retype your email address. Choose a password.
 
     ![AWS Login Credentials](images/image2.jpg)
 
-2. Choose personal or company account. 
+3. Choose personal or company account. 
     Then Fill out the required information. Click “Create Account and Continue”. **Tip: Do not include any whitespace when entering the CAPTCHA characters.**
 
     ![AWS Contact Information](images/image3.jpg)
 
-3. Next enter payment information.
+4. Next enter payment information.
 
     ![AWS Payment Information](images/image4.jpg)
     
-4. Next provide a telephone number so that Amazon can verify your identity.
+5. Next provide a telephone number so that Amazon can verify your identity.
 
     ![AWS Identity Verification](images/image5.jpg)
 
@@ -81,11 +82,11 @@ To create your account (assuming you don't have one):
 
         ![AWS Verification Complete](images/image7.jpg)
 
-5. Choose the basic support plan.
+6. Choose the basic support plan.
 
     ![AWS Support Plan](images/image8.jpg)
 
-6. You should be returned to the AWS home page. Click “Sign In to the
+7. You should be returned to the AWS home page. Click “Sign In to the
 Console”
 
     ![AWS Home](images/image9.jpg)
@@ -132,7 +133,7 @@ Console”
 **Duration:** 5-10 minutes
 
 1. Go to:
-<http://docs.aws.amazon.com/cli/latest/userguide/installing.html#install-msi-on-windows>
+<http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html>
 
 1. Download the appropriate installer (32 vs 64-bit)
 
@@ -308,9 +309,9 @@ In this section, you will upload the public portion of the key pair you just cre
     
 ## Task 4: Create a build agent VM
 
-In this section, you will create a Linux VM to act as your build agent. You will be installing Docker to this VM once it is set up and you will use this VM during the hackathon to develop and deploy.
+In this section, you will create a Linux VM to act as your build agent. You will be installing Docker to this VM once it is set up and you will use this VM during the lab to develop and deploy.
 
-**NOTE: You can set up your local machine with Docker however the setup varies for different versions of Windows.** **For this** **hackathon, the build agent approach simply allows for predictable setup.**
+**NOTE: You can set up your local machine with Docker however the setup varies for different versions of Windows.** **For this** **lab, the build agent approach simply allows for predictable setup.**
 
 1.  Navigate to the EC2 Dashboard. On the EC2 Dashboard, click “Launch Instance”
 
@@ -348,7 +349,28 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
     ![EC2 Instance List](images/ex0-image41.jpg)
     
-## Task 5: Add Resource tag to the Security Group
+## Task 5: Create an AWS Resource Group
+	
+1. Login to console.
+2. Choose "Resource Groups" from the top menu bar.
+
+   ![Resource Group](images/RG1.jpg)
+	
+3. Choose "Create a Resource Group"
+ 
+   ![Create Resource Group](images/RG2.jpg)
+	
+4. Configure as described below, then click "Save".
+	1. Use "fabmedical Resources" as the group name.
+	2. For Tags, type "Resource" as the key and "fabmedical" as the value.
+
+     ![Resource Group Configuration](images/RG3.jpg)
+
+5. The Resource Group is created
+
+   ![Resource Group Created](images/RG4.png)
+
+## Task 6: Add Resource tag to the Security Group
 
 In this section, you will add a Resource tag to the fabmedical-build-agent security group. Because we created the security group using the launch wizard, we were not able to set tags. This can make it easy to forget to clean up the security group, because it will not show up in a resource group search.
 
@@ -373,7 +395,7 @@ In this section, you will add a Resource tag to the fabmedical-build-agent secur
 
     ![Security Group Tags](images/ex0-image47.jpg)
     
-## Task 6: Connect securely to the build agent
+## Task 7: Connect securely to the build agent
 
 In this section, you will validate that you can connect to the new build agent VM.
 
@@ -389,11 +411,11 @@ In this section, you will validate that you can connect to the new build agent V
 
 4.  Connect to the new VM you created by typing the following command.
 
-    `ssh -i \[PRIVATEKEYNAME\] \[BUILDAGENTUSERNAME\]@\[BUILDAGENTIP\]`
+    `ssh -i [PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
 
     Use the private key name such as “fabmedical\_rsa”, the username for the VM such as “ubuntu”, and the IP address for the build agent VM.
 
-    `$ ssh -i fabmedical\_rsa ubuntu@54.202.82.171`
+    `$ ssh -i fabmedical_rsa ubuntu@54.202.82.171`
 
 5.  You will be asked to confirm if you want to connect, as the authenticity of the connection cannot be validated. Type “yes”.
 
@@ -407,7 +429,7 @@ In this section, you will validate that you can connect to the new build agent V
     
     **NOTE: If you have issues connecting, you may have pasted the imported the SSH public key** **into EC2** **incorrectly.** **Unfortunately, if this is the case, you** **must** **retry the import, then try to create the VM again.**
 
-## Task 7: Complete the build agent setup
+## Task 8: Complete the build agent setup
 
 In this task, you will update the packages and install Docker engine.
 
@@ -461,7 +483,7 @@ In this task, you will update the packages and install Docker engine.
 
     ![Docker ps output](images/ex0-image56.jpg)
     
-## Task 8: Create a Docker Hub account
+## Task 9: Create a Docker Hub account
 Docker images are deployed from a Docker Registry. 
 To complete the lab, you will need access to a registry that is publicly accessible to the Google Cloud cluster you are creating. 
 In this task, you will create a free Docker Hub account for this purpose, where you push images for deployment.
@@ -482,7 +504,7 @@ In this task, you will create a free Docker Hub account for this purpose, where 
 
     ![Welcome to DockerHub](images/ex0-image59.jpg)
     
-## Task 9: Create an EC2 Container Service cluster
+## Task 10: Create an EC2 Container Service cluster
 
 In this task, you will create your EC2 Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
 
@@ -534,7 +556,7 @@ In this task, you will create your EC2 Container Service cluster. You will use t
     
     **Note: If you experience errors related to lack of available** **VMs, you may have to delete some other compute resources or request** **that Amazon raise the EC2 instance limit for your account. Changing to another region** **is a simple way around this limit, as the limit is assessed** **per region. Choose one of these options and try this again.**
 
-## Task 10: Cleanup sample app
+## Task 11: Cleanup sample app
 
 In this task, you will remove the sample app service. 
 Simple though it is, this service is using resources you will need during the lab but you'll want to know how to remove them later.
