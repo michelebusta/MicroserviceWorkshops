@@ -493,7 +493,7 @@ properly.
 
     `docker ps -a`
 
-    ![](images/ex0-image29.png)
+   ![](images/ex0-image29.png)
 
 ## Task 6: Create a Docker Hub account
 Docker images are deployed from a Docker Registry. 
