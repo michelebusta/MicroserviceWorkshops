@@ -4,7 +4,12 @@ If you are just looking to learn how to set up an environment on any of the belo
 
 ```
 NEXT WORKSHOP: DEVintersection, May 2017, Orlando FL
+
+
+My Session List
+
 https://devintersection.com/#!/Visual-Studio-ASP-Azure-Conference/speakers/Michele%20Leroux%20Bustamante
+
 ```
 
 There are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
