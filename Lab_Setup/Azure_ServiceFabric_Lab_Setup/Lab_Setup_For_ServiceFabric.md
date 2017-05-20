@@ -13,12 +13,13 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 -   Local machine or a virtual machine configured with:
 
-    -   Visual Studio 2015 with Update 3 or later
-
+    -   Visual Studio 2015 with Update 3 or later with     
     -   Azure SDK 2.9.1 or later for Visual Studio 2015
-
     -   Service Fabric SDK 2.4.145 (with Runtime 5.4.145) for use with
         Visual Studio 2015
+	
+    -   Visual Studio 2017 with Azure Tools
+    -   Service Fabric SDK for 2017
 
     -   Azure PowerShell 1.0.0 or later
 
