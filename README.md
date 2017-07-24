@@ -3,11 +3,15 @@ This folder contains setup instructions to set up ahead of my microservices work
 If you are just looking to learn how to set up an environment on any of the below platforms, you can also feel free to follow these setup steps but the labs themselves are only shared with attendees.
 
 ```text 
-NEXT WORKSHOP: DEVintersection, May 2017, Orlando FL
+NEXT WORKSHOP: NDC Sydney, August 2017
+NOTE: At this event, the workshop covers ServiceFabric and will have other labs in addition to the main lab covered in this repository.
 ```
+http://ndcsydney.com/workshop/designing-developing-and-scaling-microservices-with-azure-service-fabric/
 
-[My Session List](https://devintersection.com/#!/Visual-Studio-ASP-Azure-Conference/speakers/Michele%20Leroux%20Bustamante)
 
+FULL SESSION LIST:
+
+http://ndcsydney.com/speaker/michele-bustamante
 
 
 There are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
