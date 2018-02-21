@@ -4,31 +4,28 @@ If you are just looking to learn how to set up an environment on any of the belo
 
 > UPCOMING WORKSHOPS: 
 
-> March 24-25
+```text 
+March 24-25
 2-day workshop
-
 Developing Microservces Solutions on Azure
-
 DEVintersection, Orlando FL
-
+```
 https://devintersection.com/#!/speakers/Michele%20Leroux%20Bustamante
 
-> May 7-8
+```text
+May 7-8
 2-day workshop
-
 Developing and Deploying ASP.NET Core Docker Applications - Hands On
-
 NDC {Minnesota}, Saint Paul, MN
-
+```
 https://ndcminnesota.com/speaker/michele-bustamante
 
-> May 22
+```text
+May 22
 1-day workshop
-
 ASP.NET Core and Docker on Azure - from development through deployment
-
 Techorama, Antwerp, Belgium
-
+```
 https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deployment/
 
 -----
