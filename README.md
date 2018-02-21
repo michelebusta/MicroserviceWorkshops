@@ -2,17 +2,36 @@
 This folder contains setup instructions to set up ahead of my microservices workshop labs.
 If you are just looking to learn how to set up an environment on any of the below platforms, you can also feel free to follow these setup steps but the labs themselves are only shared with attendees.
 
-```text 
-NEXT WORKSHOP: NDC Sydney, August 2017
-NOTE: At this event, the workshop covers ServiceFabric and will have other labs in addition to the main lab covered in this repository.
-```
-http://ndcsydney.com/workshop/designing-developing-and-scaling-microservices-with-azure-service-fabric/
+> UPCOMING WORKSHOPS: 
 
+> March 24-25
+2-day workshop
 
-FULL SESSION LIST:
+Developing Microservces Solutions on Azure
 
-http://ndcsydney.com/speaker/michele-bustamante
+DEVintersection, Orlando FL
 
+https://devintersection.com/#!/speakers/Michele%20Leroux%20Bustamante
+
+> May 7-8
+2-day workshop
+
+Developing and Deploying ASP.NET Core Docker Applications - Hands On
+
+NDC {Minnesota}, Saint Paul, MN
+
+https://ndcminnesota.com/speaker/michele-bustamante
+
+> May 22
+1-day workshop
+
+ASP.NET Core and Docker on Azure - from development through deployment
+
+Techorama, Antwerp, Belgium
+
+https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deployment/
+
+-----
 
 There are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
