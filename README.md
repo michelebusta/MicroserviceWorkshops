@@ -4,14 +4,6 @@ If you are just looking to learn how to set up an environment on any of the belo
 
 > UPCOMING WORKSHOPS: 
 
-```text 
-March 24-25
-2-day workshop
-Developing Microservces Solutions on Azure
-DEVintersection, Orlando FL
-```
-https://devintersection.com/#!/speakers/Michele%20Leroux%20Bustamante
-
 ```text
 May 7-8
 2-day workshop
@@ -27,6 +19,18 @@ ASP.NET Core and Docker on Azure - from development through deployment
 Techorama, Antwerp, Belgium
 ```
 https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deployment/
+
+-----
+
+> DOWNLOADS: 
+
+```text
+See your bit.ly link from the workshop you attended for updates. Also please note there will be a README file with any pertintent
+updates such as new workshop files from more recent updates provided as the platforms change. 
+
+
+Bit.ly last updated March 31, 2018. Stay tuned for another update during April 2018.
+```
 
 -----
 
