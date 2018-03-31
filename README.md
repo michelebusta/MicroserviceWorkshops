@@ -25,7 +25,8 @@ https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deploy
 > DOWNLOADS: 
 
 ```text
-See your bit.ly link from the workshop you attended for updates. Also please note there will be a README file with any pertintent
+See your bit.ly link from the workshop you attended for updates. 
+Also please note there will be a README file with any pertintent
 updates such as new workshop files from more recent updates provided as the platforms change. 
 
 
