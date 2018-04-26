@@ -1,4 +1,4 @@
-# Azure Container Service with DC / OS Lab Setup
+# Azure Container Service (AKS) Lab Setup
 
 > LAST UPDATED: 4/26/2018
 
@@ -13,7 +13,8 @@ The lab will make use of several tools and services.  Here is a list of requirem
 * An internet connection.
 * Microsoft Azure subscription must be pay-as-you-go or MSDN.
   * Trial subscriptions will not work.
-  * You must have enough cores available in your subscription to create the build agent and Azure Container Service cluster in Task 5: Create a build agent VM and Task 9: Create an Azure Container Service cluster. You’ll need eight cores if following the exact instructions in the lab, more if you choose additional agents or larger VM sizes. If you execute the steps required before the lab, you will be able to see if you need to request more cores in your sub.
+  * You must have rights to create a service principal as discussed in Task 9: Create a Service Principal — and this typically requires a subscription owner to log in. You may have to ask another subscription owner to login to the portal and execute that step ahead of time if you do not have the rights.
+  * You must have enough cores available in your subscription to create the build agent and Azure Container Service cluster in Task 5: Create a build agent VM and Task 10: Create an Azure Container Service cluster. You’ll need eight cores if following the exact instructions in the lab, more if you choose additional agents or larger VM sizes. If you execute the steps required before the lab, you will be able to see if you need to request more cores in your sub.
 * Local machine or a virtual machine configured with:
   * A browser, preferably Chrome for consistency with the lab implementation tests
   * Command prompt
@@ -26,6 +27,8 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 **Create your Azure Account**
 
+> NOTE: remember that you have to complete Task 9: Create a Service Principal before you arrive to the workshop in case you do not have rights and need support to complete the task
+
 **Create a cluster and supporting tooling / setup**
 
 * Task 1: Create a new Resource Group
@@ -35,8 +38,11 @@ The lab will make use of several tools and services.  Here is a list of requirem
 * Task 5: Create a build agent VM
 * Task 6: Connect securely to the build agent
 * Task 7: Complete the build agent setup
-* Task 8: Create a Docker Hub account
-* Task 9: Create an Azure Container Service cluster
+* Task 8: Create an Azure Container Registry
+* Task 9: Create a Service Principal
+* Task 10: Create an Azure Container Service cluster
+* Task 11: Install Azure CLI
+* Task 12: Install Kubernetes CLI
 
 ## Create Azure Account
 
@@ -338,70 +344,143 @@ In this task, you will update the packages and install Docker engine.
 
     ![WSL](images/ex0-task7-image_04.png)
 
-### Task 8: Create a Docker Hub account
+### Task 8: Create an Azure Container Registry
 
-> NOTE: this is an alternative to using Azure Container Registry, since there are quite a few steps required to deploy container images to DCOS from a secure registry
+You deploy Docker images from a registry. To complete the lab, you will need access to a registry that is accessible to the Azure Container Service cluster you are creating. In this task, you will create an Azure Container Registry (ACR) for this purpose, where you push images for deployment.
 
-Docker images are deployed from a Docker Registry.
-To complete the lab, you will need access to a registry that is publicly accessible to the DC/OS Cloud cluster you are creating.
-In this task, you will create a free Docker Hub account for this purpose, where you push images for deployment.
+1. In the [Azure Portal](https://portal.azure.com), select + Create a resource, Containers, then click Azure Container Registry.
 
-> NOTE: If you already have a public Docker Hub account you do not need to complete this task – you will need the name of the account for the exercises that rely on it.
+    ![Microsoft Azure](images/ex0-task8-image_01.png)
 
-1. Navigate to Docker Hub at [https://hub.docker.com](https://hub.docker.com).
-2. Create a new Docker Hub account by providing a unique name for your Docker Hub ID, your email address for confirmation of the account, and a password.
+2. On the Create container registry blade, enter the following:
 
-    ![New to Docker](images/ex0-task8-image_01.png)
+    * Registry name: Enter a name, such as "fabmedicalSUFFIX," as shown in the following screenshot.
+    * Subscription: Choose the same subscription you are using for all your work.
+    * Resource group: Choose Use existing and select the resource group you created previously.
+    * Location: Choose the same region that you did before.
+    * Admin user: Select Enable.
+    * SKU: Select Standard.
 
-3. Once you confirm your email address, you can sign in and confirm your Docker Hub account is ready.
+        ![Microsoft Azure](images/ex0-task8-image_02.png)
 
-    ![Confirm email address](images/ex0-task8-image_02.png)
+3. Select Create.
+4. Navigate to your ACR account in the Azure Portal. As this is a new account, you will not see any repositories yet. You will create these during the lab.
 
-4. Login to your Docker Hub account. If it is a new account, you will not see any repositories yet. You will create these during the lab.
+    ![Microsoft Azure](images/ex0-task8-image_03.png)
 
-    ![Welcome to DockerHub](images/ex0-task8-image_03.png)
+### Task 9: Create a Service Principal
 
-### Task 9: Create an Azure Container Service cluster (DC/OS)
+Azure Container Service requires an Azure Active Directory service principal to interact with Azure APIs. The service principal is needed to dynamically manage resources such as user-defined routes and the Layer 4 Azure Load Balancer. The easiest way to set up the service principal is using the Azure cloud shell.
 
-In this task you will create your Azure Container Service cluster based on Apache Mesos. You will use the same SSH key you created previously to connect to this cluster in the next task.
+> NOTE: By default, creating a service principal in Azure AD requires account owner permission. You may have trouble creating a service principal if you are not the account owner.
 
-> NOTE: In this step, you will be asked to create a second Resource Group as part of the template for creating the Azure Container Service cluster. This is due to the current template not providing the option to select an existing Resource Group, and this may change in the future.
-
-1. From the Azure Portal, select New -> Containers and select Azure Container Service.
+1. Open cloud shell by selecting the cloud shell icon in the menu bar.
 
     ![Microsoft Azure](images/ex0-task9-image_01.png)
 
-2. From the Azure Container Service blade click Create.
-3. In the Basics blade provide the information shown in the screen shot that follows:
+2. The cloud shell will open in the browser window.  Choose “Bash (Linux)” if prompted or use the left-hand dropdown on the shell menu bar to choose “Bash” (as shown).
 
-    * Enter a username such as “adminfabmedical”.
-    * Paste the same SSH public key you used for the agent VM previously.
-    * Choose the same subscription and location as you are using for other resources.
-    * Since the template does not support using an existing Resource Group, provide a new name such adding a “2” to the suffix, such as fabmedical-SUFFIX2.
+    ![Cloud Shell](images/ex0-task9-image_02.png)
 
-        ![Microsoft Azure](images/ex0-task9-image_02.png)
+3. Before completing the steps to create the service principal, you should make sure to set your default subscription correctly. To view your current subscription type:
 
-4. From the Framework configuration blade, choose DC/OS for the Orchestrator configuration, then click OK.
+    `az account show`
+    ![Cloud Shell](images/ex0-task9-image_03.png)
 
-    ![Microsoft Azure](images/ex0-task9-image_03.png)
+4. To list all of your subscriptions, type:
 
-5. From the Azure Container service settings blade, enter the settings shown in the screen shot that follows:
+    `az account list`
+    ![Cloud Shell](images/ex0-task9-image_04.png)
 
-    * Set the Agent count to 2.
-    * Choose Standard DS1 for the Agent virtual machine size.
-    * Set the Master count to 1.
-    * Set the DNS prefix to something like “fabmedical-SUFFIX”.
-    * Click OK.
+5. To set your default subscription to something other than the current selection, type the following, replacing {id} with the desired subscription id value:
 
-        ![Microsoft Azure](images/ex0-task9-image_04.png)
+    `az account set --subscription {id}`
 
-6. Review the Summary blade and click OK.
+6. To create a service principal, type the following command, replacing {id} with your subscription identifier, and replacing suffix with your chosen suffix to make the name unique.
 
-    ![Microsoft Azure](images/ex0-task9-image_05.png)
+    `az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/{id}" --name="Fabmedical-sp-{SUFFIX}"`
 
-7. From the Purchase blade, click Purchase.
-8. You should see a successful deployment notification when the cluster is ready. It can take up to 30 minutes or more before your Azure Container Service cluster is listed in the Azure Portal.
+7. The service principal command will produce output like this. Copy this information; you will need it later.
 
-    ![Microsoft Azure](images/ex0-task9-image_06.png)
+    ![Cloud Shell](images/ex0-task9-image_05.png)
 
-> Note: If you experience errors related to lack of available cores, you may have to delete some other compute resources or request additional cores be added to your subscription and then try this again.
+### Task 10: Create an Azure Container Service (AKS) cluster
+
+In this task, you will create your Azure Container Service (AKS) cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
+
+> NOTE: In this step, you will be asked to create a second Resource Group as part of the template for creating the Azure Container Service cluster. This is due to the current template not providing the option to select an existing Resource Group, and this may change in the future.
+
+1. From the Azure Portal, select + Create a resource, Containers and select Azure Container Service - AKS.
+
+    ![Microsoft Azure](images/ex0-task10-image_01.png)
+
+2. In the Basics blade provide the information shown in the screenshot that follows:
+
+    * Name: Enter fabmedical-SUFFIX.
+    * DNS Prefix: Enter fabmedical-SUFFIX.
+    * Kubernetes version: keep default.
+    * Subscription: Choose your subscription which you have been using throughout the lab.
+    * Resource group: Create new and provide a unique name. Since the template does not support using an existing Resource Group, provide a new name such adding a “2” to the suffix, such as fabmedical-SUFFIX-2.
+    * Location: Choose a location.
+
+        ![Microsoft Azure](images/ex0-task10-image_02.png)
+
+3. Select OK.
+4. On the Configuration blade provide:
+
+    * User name: Enter adminfabmedical
+    * SSH Public Key: Paste the same SSH public key (fabmedical.pub) you used for the agent VM previously.
+    * Service principal client ID: Use the service principal “appId” from the previous step.
+    * Service principal client secret: Use the service principal “password” from the previous step.
+    * Node count: 2
+    * Node virtual machine size: Standard DS2_V2
+    * OS Disk Size: leave empty
+
+        ![Microsoft Azure](images/ex0-task10-image_03.png)
+
+5. Select OK.
+6. On the Summary blade, you should see that validation passed; select OK.
+
+    ![Microsoft Azure](images/ex0-task10-image_04.png)
+
+7. The Azure Container Service cluster will begin deployment to your Azure subscription.
+
+    ![Microsoft Azure](images/ex0-task10-image_05.png)
+
+8. You should see a successful deployment notification when the cluster is ready. It can take up to 10 minutes before your Azure Container Service cluster is listed in the Azure Portal. You can proceed to the next step while waiting for this to complete, then return to view the success of the deployment.
+
+    ![Microsoft Azure](images/ex0-task10-image_06.png)
+
+> NOTE: If you experience errors related to lack of available cores, you may have to delete some other compute resources or request additional cores to your subscription and then try this again.
+
+### Task 11: Install Azure CLI
+
+In later exercises, you will need the Azure CLI 2.0 to connect to your Kubernetes cluster and run commands from your local machine. A complete list of instructions for supported platforms is available on this page:
+
+[https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+
+1. For MacOS – use homebrew
+
+    `brew update`
+
+    `brew install azure-cli`
+
+2. For Windows – using WSL
+
+    `echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ wheezy main" | sudo tee /etc/apt/sources.list.d/azure-cli.list`
+
+    `sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893`
+
+    `sudo apt-get install apt-transport-https`
+
+    `sudo apt-get update && sudo apt-get install azure-cli`
+
+### Task 12: Install Kubernetes CLI
+
+In later exercises, you will need the Kubernetes CLI (kubectl) to deploy to your Kubernetes cluster and run commands from your local machine.
+
+1. Regardless of the operating system, considering the usage of WSL on Windows, install the Kubernetes client using Azure CLI
+
+    `az login`
+
+    `sudo az acs kubernetes install-cli --install-location /usr/local/bin/kubectl`

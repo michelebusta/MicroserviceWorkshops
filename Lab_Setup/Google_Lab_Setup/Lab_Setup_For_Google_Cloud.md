@@ -1,4 +1,7 @@
 # Google Cloud Lab Setup
+
+> LAST UPDATED: 8/10/2017
+
 This document describes all of the preparation you should take care of prior to the workshop.
 If you do not have time, you may work on this during the workshop but may not complete as many lab steps
 during lab times and can work on your own time to complete the lab at your leisure.
