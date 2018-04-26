@@ -49,12 +49,16 @@ The idea is to give you a choice of platform you are most interested in during t
 
 You should follow the setup steps in this folder to set up your environment. When the workshop is fully hands-on you want to do this BEFORE the workshop. Sometimes the labs are used for your own time given the content that needs to be covered.
 
-You will choose from the following environments:
+Each workshop focuses on different platforms, and this will be indicated in the workshop link so that you know which labs to choose from. I check the relevant labs before a hands on workshop so the pace of "update" depends on the workshop activity. I keep each workshop indicating it's last "review" date. 
 
+You'll choose from the following environments:
+
+* Azure Container Service (AKS) with Kubernetes
 * Azure Container Service with DC / OS
 * AWS with EC2 Container Services
 * Google Cloud with Google Container Engine 
 * Azure Service Fabric
+* Azure with Docker Enterprise Edition (COMING SOON)
 
 ## Prerequisite setup steps
 
