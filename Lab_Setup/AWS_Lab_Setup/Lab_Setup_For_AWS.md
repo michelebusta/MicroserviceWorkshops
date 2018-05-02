@@ -140,11 +140,11 @@ You will need WSL to complete various steps. A complete list of instructions for
 
 5. Test your installation:
 
-    `$ aws -version`
+    `$ aws --version`
 
     > This should print version information.
 
-    ![AWS Version Info](images/image18.jpg)
+    ![AWS Version Info](images/image18.png)
 
 ### Task 4: Setup IAM Access
 
