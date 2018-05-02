@@ -41,7 +41,6 @@ The lab will make use of several tools and services.  Here is a list of requirem
 * Task 7: Complete the build agent setup
 * Task 8: Create a Docker Hub account
 * Task 9: Create an EC2 Container Service cluster
-* Task 10: Cleanup sample app
 
 ## Create an AWS Account
 
@@ -460,79 +459,50 @@ In this task, you will create a free Docker Hub account for this purpose, where 
 
     ![Welcome to DockerHub](images/ex0-image59.jpg)
 
-### Task 9: Create an EC2 Container Service cluster
+### Task 9: Create an Elastic Container Service cluster
 
-In this task, you will create your EC2 Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
+In this task, you will create your Elastic Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
 
-1. From the AWS Console home page search for EC2. Choose “EC2 Container Service”.
+1. From the AWS Console home page search for "container". Choose “Elastic Container Service”.
 
-    ![ECS Search](images/ex0-image60.jpg)
+    ![ECS Search](images/ex0-image60.png)
 
-2. On the EC2 Container Service getting started page, click “Get started”.
+1. On the Elastic Container Service getting started page, click “Clusters” on the left hand menu.
 
-    ![ECS getting started](images/ex0-image61.jpg)
+    ![ECS getting started](images/ex0-image61.png)
 
-3. Choose to deploy the sample application to a new cluster. Uncheck the box for Amazon ECR.
+1. Click "Create Cluster"
 
-    ![ECS options](images/ex0-image62.jpg)
+    ![ECS](images/ecs-create-cluster.png)
+    
+1. Choose the `EC2 Linux + Networking` cluster template then click "Next Step"
 
-4. Accept the default options for the task definition and click next.
-5. Accept the default options for the service configuration and click next.
-6. Configure the cluster. Then click “Review & launch”.
+    > Note: As of this writing different AWS regions have different capabilities and UI versions, therefore screenshots may vary slightly depending on your region of choice.
+    
+    ![ECS](images/ec2-linux-template.png)
 
-    * Use “fabmedical” as the cluster name.
-    * Set number of instances to “2”.
-    * Choose “fabmedical\_rsa” as the key pair.
-    * Accept default value for the security group.
-    * Note that the wizard will create a role called “ecsInstanceRole”
+1. Configure the cluster as described below then click "Create"
+    * Cluster name: fabmedical    
+    * Instance Configuration
+        * Provisioning Model: On-Demand instance
+        * EC2 Instance Type: Select t2.micro
+        * Number of instances: 3
+        * EBS storage (GiB): 22 
+        * Key pair: Select fabmedical_rsa
+    * Networking
+        * VPC: Create a new VPC
+        * CIDR block: 10.0.0.0/16
+        * Subnet 1: 10.0.0.0/24
+        * Subnet 2: 10.0.1.0/24
+        * Security group inbound rules
+            * CIDR block: 0.0.0.0/0
+            * Port range: 80
+    * Container instance IAM role: Create new role
+    
+    ![ECS](images/ecs-config.png)
+    
+1. Click "View Cluster" when the cluster deployment completes.
 
-        ![ECS Configure Cluster](images/ex0-image63.jpg)
-
-7. Click “Launch instance & run service”. The launch wizard will start the creation of several resources and this will take some time. When the allocation is complete, the “View Service” button will enable.
-
-    ![Launch Status](images/ex0-image64.jpg)
-
-8. Click “View Service” when it becomes available. Then click on the running task ID.
-
-    ![Task List](images/ex0-image65.jpg)
-
-9. Expand the disclosure triangle next to the “simple-app” container. Then click the External Link.
-
-    ![Container IP](images/ex0-image66.jpg)
-
-10. You should see a web page showing the sample app when the cluster is ready. It can take up to 30 minutes or more before your EC2 Container Service cluster is fully available.
-
-    ![Sample Web App](images/ex0-image72.jpg)
+    ![ECS](images/view-cluster.png)
 
     > **NOTE: If you experience errors related to lack of available** **VMs, you may have to delete some other compute resources or request** **that Amazon raise the EC2 instance limit for your account. Changing to another region** **is a simple way around this limit, as the limit is assessed** **per region. Choose one of these options and try this again.**
-
-### Task 10: Cleanup sample app
-
-In this task, you will remove the sample app service.
-Simple though it is, this service is using resources you will need during the lab but you'll want to know how to remove them later.
-
-1. Navigate to the ECS home page, then choose the “fabmedical”.
-
-    ![fabmedical cluster](images/ex0-image74.jpg)
-
-2. Check the checkmark next to the “simple-webapp” service. Then choose Update.
-
-    ![Update Service Button](images/ex0-image75.jpg)
-
-3. Change the number of tasks to 0. Then click “Update Service”
-
-    ![Update Service](images/ex0-image76.jpg)
-
-4. On the next screen click “View Service”. Refresh the deployment list until the running count reaches 0.
-
-    ![Service Deployments](images/ex0-image77.jpg)
-
-5. When the Running count reaches 0, you can click “Delete”.
-
-    ![Delete Service](images/ex0-image78.jpg)
-
-6. Next, confirm that you want to delete the service.
-
-    You have deleted the service and receive the confirmation message as shown below.
-
-    ![Service Deleted](images/ex0-image79.jpg)
