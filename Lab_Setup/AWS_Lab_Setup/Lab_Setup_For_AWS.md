@@ -32,17 +32,16 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 **Create a cluster and supporting tooling / setup (30 minutes)**
 
-
-* Task 2: Create an SSH key
-* Task 3: Upload public key to EC2
-* Task 4: Create a build agent VM
-* Task 5: Create an AWS Resource Group
-* Task 6: Add Resource tag to the Security Group
-* Task 7: Connect securely to the build agent
-* Task 8: Complete the build agent setup
-* Task 9: Create a Docker Hub account
-* Task 10: Create an EC2 Container Service cluster
-* Task 11: Cleanup sample app
+* Task 1: Create an SSH key
+* Task 2: Upload public key to EC2
+* Task 3: Create a build agent VM
+* Task 4: Create an AWS Resource Group
+* Task 5: Add Resource tag to the Security Group
+* Task 6: Connect securely to the build agent
+* Task 7: Complete the build agent setup
+* Task 8: Create a Docker Hub account
+* Task 9: Create an EC2 Container Service cluster
+* Task 10: Cleanup sample app
 
 ## Create an AWS Account
 
@@ -211,9 +210,7 @@ The account admin can be deleted after the workshop if you choose.
 
 **Duration**: 30 minutes (possibly additional time if AWS provisioning is slower)
 
-
-
-### Task 2: Create an SSH key
+### Task 1: Create an SSH key
 
 In this section, you will create an SSH key to securely access the VMs you create during the upcoming exercises.
 
@@ -240,7 +237,7 @@ In this section, you will create an SSH key to securely access the VMs you creat
 
     ![WSL](images/ex0-task1-image_03.png)
 
-### Task 3: Upload public key to EC2
+### Task 2: Upload public key to EC2
 
 In this section, you will upload the public portion of the key pair you just created to EC2. This allows AWS to assign the key to resources as it creates them, which in turn allows you to authenticate with those resources using the private key.
 
@@ -264,7 +261,7 @@ In this section, you will upload the public portion of the key pair you just cre
 
     ![Key Pairs](images/ex0-image25.jpg)
 
-### Task 4: Create a build agent VM
+### Task 3: Create a build agent VM
 
 In this section, you will create a Linux VM to act as your build agent. You will be installing Docker to this VM once it is set up and you will use this VM during the lab to develop and deploy.
 
@@ -304,7 +301,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
     ![EC2 Instance List](images/ex0-image41.jpg)
 
-### Task 5: Create an AWS Resource Group
+### Task 4: Create an AWS Resource Group
 
 1. Login to console.
 2. Choose "Resource Groups" from the top menu bar.
@@ -325,7 +322,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
    ![Resource Group Created](images/RG4.png)
 
-### Task 6: Add Resource tag to the Security Group
+### Task 5: Add Resource tag to the Security Group
 
 In this section, you will add a Resource tag to the fabmedical-build-agent security group. Because we created the security group using the launch wizard, we were not able to set tags. This can make it easy to forget to clean up the security group, because it will not show up in a resource group search.
 
@@ -350,7 +347,7 @@ In this section, you will add a Resource tag to the fabmedical-build-agent secur
 
     ![Security Group Tags](images/ex0-image47.jpg)
 
-### Task 7: Connect securely to the build agent
+### Task 6: Connect securely to the build agent
 
 In this section, you will validate that you can connect to the new build agent VM.
 
@@ -383,7 +380,7 @@ In this section, you will validate that you can connect to the new build agent V
 
     > **NOTE: If you have issues connecting, you may have pasted the imported the SSH public key** **into EC2** **incorrectly.** **Unfortunately, if this is the case, you** **must** **retry the import, then try to create the VM again.**
 
-### Task 8: Complete the build agent setup
+### Task 7: Complete the build agent setup
 
 In this task, you will update the packages and install Docker engine.
 
@@ -443,7 +440,7 @@ In this task, you will update the packages and install Docker engine.
 
     ![WSL](images/ex0-task8-image_04.png)
 
-### Task 9: Create a Docker Hub account
+### Task 8: Create a Docker Hub account
 
 Docker images are deployed from a Docker Registry.
 To complete the lab, you will need access to a registry that is publicly accessible to the AWS Cloud cluster you are creating.
@@ -464,7 +461,7 @@ In this task, you will create a free Docker Hub account for this purpose, where 
 
     ![Welcome to DockerHub](images/ex0-image59.jpg)
 
-### Task 10: Create an EC2 Container Service cluster
+### Task 9: Create an EC2 Container Service cluster
 
 In this task, you will create your EC2 Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
 
@@ -510,7 +507,7 @@ In this task, you will create your EC2 Container Service cluster. You will use t
 
     > **NOTE: If you experience errors related to lack of available** **VMs, you may have to delete some other compute resources or request** **that Amazon raise the EC2 instance limit for your account. Changing to another region** **is a simple way around this limit, as the limit is assessed** **per region. Choose one of these options and try this again.**
 
-### Task 11: Cleanup sample app
+### Task 10: Cleanup sample app
 
 In this task, you will remove the sample app service.
 Simple though it is, this service is using resources you will need during the lab but you'll want to know how to remove them later.
