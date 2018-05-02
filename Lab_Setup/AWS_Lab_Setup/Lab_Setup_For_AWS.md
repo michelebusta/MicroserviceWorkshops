@@ -486,7 +486,7 @@ In this task, you will create your Elastic Container Service cluster. You will u
     * Instance Configuration
         * Provisioning Model: On-Demand instance
         * EC2 Instance Type: Select t2.micro
-        * Number of instances: 3
+        * Number of instances: 2
         * EBS storage (GiB): 22 
         * Key pair: Select fabmedical_rsa
     * Networking
