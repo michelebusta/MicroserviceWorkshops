@@ -26,13 +26,13 @@ The lab will make use of several tools and services.  Here is a list of requirem
 **Create your AWS Account**
 
 * Task 1: Create an Amazon Web Services account
-* Task 2: Install AWS CLI (Linux/Mac)
-* Task 3: Install AWS CLI (Windows)
+* Task 2: Install WSL (Bash on Ubuntu on Windows)
+* Task 3: Install AWS CLI 
 * Task 4: Setup IAM Access
 
 **Create a cluster and supporting tooling / setup (30 minutes)**
 
-* Task 1: Install WSL (Bash on Ubuntu on Windows)
+
 * Task 2: Create an SSH key
 * Task 3: Upload public key to EC2
 * Task 4: Create a build agent VM
@@ -103,7 +103,13 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
     ![AWS Console Home](images/image11.jpg)
 
-### Task 2: Install AWS CLI (Linux/Mac)
+### Task 2: Install WSL (Bash on Ubuntu on Windows)
+
+> NOTE: If you are using a Windows 10 development machine, follow these steps. For Mac OS you can ignore this step since you will be using Terminal for all commands.
+
+You will need WSL to complete various steps. A complete list of instructions for supported Windows 10 versions is available on this page: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+### Task 3: Install AWS CLI
 
 **Duration:** 5-10 minutes
 
@@ -134,36 +140,7 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
     > This should print version information.
 
-### Task 3: Install AWS CLI (Windows)
-
-**Duration:** 5-10 minutes
-
-1. Go to:
-
-    [http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html](http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html)
-
-2. Download the appropriate installer (32-bit vs 64-bit)
-
-3. Start the installation wizard click through the next few screens, accept default options if any.
-
-    ![AWS Wizard](images/image12.jpg)
-
-    ![AWS EULA](images/image13.jpg)
-
-    ![AWS Features](images/image14.jpg)
-
-    ![AWS Install](images/image15.jpg)
-
-    ![AWS Wait](images/image16.jpg)
-
-    ![AWS Finish](images/image17.jpg)
-
-4. Verify installation.
-
-    * Start a terminal by clicking the windows menu and typing “cmd” then pressing enter.
-    * Test installation by printing version information
-
-        ![AWS Version Info](images/image18.jpg)
+    ![AWS Version Info](images/image18.jpg)
 
 ### Task 4: Setup IAM Access
 
@@ -230,11 +207,7 @@ The account admin can be deleted after the workshop if you choose.
 
 **Duration**: 30 minutes (possibly additional time if AWS provisioning is slower)
 
-### Task 1: Install WSL (Bash on Ubuntu on Windows)
 
-> NOTE: If you are using a Windows 10 development machine, follow these steps. For Mac OS you can ignore this step since you will be using Terminal for all commands.
-
-You will need WSL to complete various steps. A complete list of instructions for supported Windows 10 versions is available on this page: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 ### Task 2: Create an SSH key
 
