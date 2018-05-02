@@ -233,7 +233,7 @@ In this section, you will create an SSH key to securely access the VMs you creat
 4. You will be asked to save the generated key to a file. Enter ".ssh/fabmedical" for the name.
 5. Enter a passphrase when prompted, and don’t forget it!
 6. Because you entered “.ssh/fabmedical”, the file will be generated in the “.ssh” folder in your user folder, where WSL opens by default.
-7. Keep this WSL window open and remain in the default directory for Task 5: Create a build agent VM.
+7. Keep this WSL window open and remain in the default directory you will use it in later tasks.
 
     ![WSL](images/ex0-task1-image_03.png)
 
@@ -241,23 +241,23 @@ In this section, you will create an SSH key to securely access the VMs you creat
 
 In this section, you will upload the public portion of the key pair you just created to EC2. This allows AWS to assign the key to resources as it creates them, which in turn allows you to authenticate with those resources using the private key.
 
+1.  In your WSL terminal, run the following command to upload your public key material.
+
+    > Note that this command will upload the key to `us-west-2`, if you would like to use a different region, be sure to update the command to reflect your preference.
+    
+    ```bash
+    aws ec2 import-key-pair --key-name fabmedical_rsa --public-key-material "`cat .ssh/fabmedical.pub`" --region us-west-2
+    ```
+
 1. From the AWS Console type “EC2” in the services search box. Select the “EC2” search result.
 
     ![EC2 Search](images/ex0-image21.jpg)
 
-2. On the EC2 Dashboard, click the “Key Pairs” item on the left menu.
+1. On the EC2 Dashboard, click the “Key Pairs” item on the left menu.
 
     ![EC2 Key Pairs](images/ex0-image22.jpg)
 
-3. Click on “Import Key Pair”.
-
-    ![Import Key Pair](images/ex0-image23.jpg)
-
-4. Choose “fabmedical\_rsa.pub” and the name and contents will be automatically populated. You should see “ssh-rsa” at the beginning of the content block. If you do not, you may have picked the incorrect file. Click Import.
-
-    ![Import Key Pair Dialog](images/ex0-image24.jpg)
-
-5. Your key should now be available.
+1. Your key should now be available.
 
     ![Key Pairs](images/ex0-image25.jpg)
 
