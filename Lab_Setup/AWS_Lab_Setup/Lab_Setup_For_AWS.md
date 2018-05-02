@@ -121,6 +121,8 @@ You will need WSL to complete various steps. A complete list of instructions for
     `$ python --version`
 
     > This should print out version info, otherwise you must install python.
+    
+    > WSL users: try `sudo apt update && sudo apt install python-minimal` if python is not found.
 
 2. Download the installer:
 
@@ -129,6 +131,8 @@ You will need WSL to complete various steps. A complete list of instructions for
 3. Unpack the bundle:
 
     `$ unzip awscli-bundle.zip`
+    
+    > WSL users: try `sudo apt install unzip` if this command fails
 
 4. Run the installer:
 
