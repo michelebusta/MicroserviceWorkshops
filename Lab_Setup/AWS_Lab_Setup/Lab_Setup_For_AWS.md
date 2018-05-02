@@ -359,14 +359,13 @@ In this section, you will validate that you can connect to the new build agent V
 
     ![VM IP Address](images/ex0-image49.jpg)
 
-3. From your local machine, launch Git Bash and navigate to your user directory c:\\Users\\\[your username\] where the key pair was previously created.
-4. Connect to the new VM you created by typing the following command.
+3. From your WSL terminal, connect to the new VM you created by typing the following command.
 
-    `ssh -i [PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
+    `ssh -i .ssh/[PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
 
     Use the private key name such as “fabmedical\_rsa”, the username for the VM such as “ubuntu”, and the IP address for the build agent VM.
 
-    `$ ssh -i fabmedical_rsa ubuntu@54.202.82.171`
+    `ssh -i .ssh/fabmedical ubuntu@52.34.187.56`
 
 5. You will be asked to confirm if you want to connect, as the authenticity of the connection cannot be validated. Type “yes”.
 
@@ -374,9 +373,9 @@ In this section, you will validate that you can connect to the new build agent V
 
 7. You will now be connected to the VM with a command prompt such as the following. Keep this command prompt open for the next step.
 
-    `ubuntu@ip-172-31-16-103:~\$`
+    `ubuntu@ip-172-31-16-103:~$`
 
-    ![SSH Remote Session](images/ex0-image51.jpg)
+    ![SSH Remote Session](images/ex0-image51.png)
 
     > **NOTE: If you have issues connecting, you may have pasted the imported the SSH public key** **into EC2** **incorrectly.** **Unfortunately, if this is the case, you** **must** **retry the import, then try to create the VM again.**
 
