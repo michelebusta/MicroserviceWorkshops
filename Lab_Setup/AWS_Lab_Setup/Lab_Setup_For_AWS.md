@@ -26,23 +26,21 @@ The lab will make use of several tools and services.  Here is a list of requirem
 **Create your AWS Account**
 
 * Task 1: Create an Amazon Web Services account
-* Task 2: Install AWS CLI (Linux/Mac)
-* Task 3: Install AWS CLI (Windows)
+* Task 2: Install WSL (Bash on Ubuntu on Windows)
+* Task 3: Install AWS CLI 
 * Task 4: Setup IAM Access
 
 **Create a cluster and supporting tooling / setup (30 minutes)**
 
-* Task 1: Install WSL (Bash on Ubuntu on Windows)
-* Task 2: Create an SSH key
-* Task 3: Upload public key to EC2
-* Task 4: Create a build agent VM
-* Task 5: Create an AWS Resource Group
-* Task 6: Add Resource tag to the Security Group
-* Task 7: Connect securely to the build agent
-* Task 8: Complete the build agent setup
-* Task 9: Create a Docker Hub account
-* Task 10: Create an EC2 Container Service cluster
-* Task 11: Cleanup sample app
+* Task 1: Create an SSH key
+* Task 2: Upload public key to EC2
+* Task 3: Create a build agent VM
+* Task 4: Create an AWS Resource Group
+* Task 5: Add Resource tag to the Security Group
+* Task 6: Connect securely to the build agent
+* Task 7: Complete the build agent setup
+* Task 8: Create a Docker Hub account
+* Task 9: Create an EC2 Container Service cluster
 
 ## Create an AWS Account
 
@@ -103,7 +101,13 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
     ![AWS Console Home](images/image11.jpg)
 
-### Task 2: Install AWS CLI (Linux/Mac)
+### Task 2: Install WSL (Bash on Ubuntu on Windows)
+
+> NOTE: If you are using a Windows 10 development machine, follow these steps. For Mac OS you can ignore this step since you will be using Terminal for all commands.
+
+You will need WSL to complete various steps. A complete list of instructions for supported Windows 10 versions is available on this page: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+### Task 3: Install AWS CLI
 
 **Duration:** 5-10 minutes
 
@@ -115,6 +119,8 @@ The lab will make use of several tools and services.  Here is a list of requirem
     `$ python --version`
 
     > This should print out version info, otherwise you must install python.
+    
+    > WSL users: try `sudo apt update && sudo apt install python-minimal` if python is not found.
 
 2. Download the installer:
 
@@ -123,6 +129,8 @@ The lab will make use of several tools and services.  Here is a list of requirem
 3. Unpack the bundle:
 
     `$ unzip awscli-bundle.zip`
+    
+    > WSL users: try `sudo apt install unzip` if this command fails
 
 4. Run the installer:
 
@@ -130,40 +138,11 @@ The lab will make use of several tools and services.  Here is a list of requirem
 
 5. Test your installation:
 
-    `$ aws -version`
+    `$ aws --version`
 
     > This should print version information.
 
-### Task 3: Install AWS CLI (Windows)
-
-**Duration:** 5-10 minutes
-
-1. Go to:
-
-    [http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html](http://docs.aws.amazon.com/cli/latest/userguide/awscli-install-windows.html)
-
-2. Download the appropriate installer (32-bit vs 64-bit)
-
-3. Start the installation wizard click through the next few screens, accept default options if any.
-
-    ![AWS Wizard](images/image12.jpg)
-
-    ![AWS EULA](images/image13.jpg)
-
-    ![AWS Features](images/image14.jpg)
-
-    ![AWS Install](images/image15.jpg)
-
-    ![AWS Wait](images/image16.jpg)
-
-    ![AWS Finish](images/image17.jpg)
-
-4. Verify installation.
-
-    * Start a terminal by clicking the windows menu and typing “cmd” then pressing enter.
-    * Test installation by printing version information
-
-        ![AWS Version Info](images/image18.jpg)
+    ![AWS Version Info](images/image18.png)
 
 ### Task 4: Setup IAM Access
 
@@ -230,13 +209,7 @@ The account admin can be deleted after the workshop if you choose.
 
 **Duration**: 30 minutes (possibly additional time if AWS provisioning is slower)
 
-### Task 1: Install WSL (Bash on Ubuntu on Windows)
-
-> NOTE: If you are using a Windows 10 development machine, follow these steps. For Mac OS you can ignore this step since you will be using Terminal for all commands.
-
-You will need WSL to complete various steps. A complete list of instructions for supported Windows 10 versions is available on this page: [https://docs.microsoft.com/en-us/windows/wsl/install-win10](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
-
-### Task 2: Create an SSH key
+### Task 1: Create an SSH key
 
 In this section, you will create an SSH key to securely access the VMs you create during the upcoming exercises.
 
@@ -259,35 +232,35 @@ In this section, you will create an SSH key to securely access the VMs you creat
 4. You will be asked to save the generated key to a file. Enter ".ssh/fabmedical" for the name.
 5. Enter a passphrase when prompted, and don’t forget it!
 6. Because you entered “.ssh/fabmedical”, the file will be generated in the “.ssh” folder in your user folder, where WSL opens by default.
-7. Keep this WSL window open and remain in the default directory for Task 5: Create a build agent VM.
+7. Keep this WSL window open and remain in the default directory you will use it in later tasks.
 
     ![WSL](images/ex0-task1-image_03.png)
 
-### Task 3: Upload public key to EC2
+### Task 2: Upload public key to EC2
 
 In this section, you will upload the public portion of the key pair you just created to EC2. This allows AWS to assign the key to resources as it creates them, which in turn allows you to authenticate with those resources using the private key.
+
+1.  In your WSL terminal, run the following command to upload your public key material.
+
+    > Note that this command will upload the key to `us-west-2`, if you would like to use a different region, be sure to update the command to reflect your preference.
+    
+    ```bash
+    aws ec2 import-key-pair --key-name fabmedical_rsa --public-key-material "`cat .ssh/fabmedical.pub`" --region us-west-2
+    ```
 
 1. From the AWS Console type “EC2” in the services search box. Select the “EC2” search result.
 
     ![EC2 Search](images/ex0-image21.jpg)
 
-2. On the EC2 Dashboard, click the “Key Pairs” item on the left menu.
+1. On the EC2 Dashboard, click the “Key Pairs” item on the left menu.
 
     ![EC2 Key Pairs](images/ex0-image22.jpg)
 
-3. Click on “Import Key Pair”.
-
-    ![Import Key Pair](images/ex0-image23.jpg)
-
-4. Choose “fabmedical\_rsa.pub” and the name and contents will be automatically populated. You should see “ssh-rsa” at the beginning of the content block. If you do not, you may have picked the incorrect file. Click Import.
-
-    ![Import Key Pair Dialog](images/ex0-image24.jpg)
-
-5. Your key should now be available.
+1. Your key should now be available.
 
     ![Key Pairs](images/ex0-image25.jpg)
 
-### Task 4: Create a build agent VM
+### Task 3: Create a build agent VM
 
 In this section, you will create a Linux VM to act as your build agent. You will be installing Docker to this VM once it is set up and you will use this VM during the lab to develop and deploy.
 
@@ -327,7 +300,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
     ![EC2 Instance List](images/ex0-image41.jpg)
 
-### Task 5: Create an AWS Resource Group
+### Task 4: Create an AWS Resource Group
 
 1. Login to console.
 2. Choose "Resource Groups" from the top menu bar.
@@ -348,7 +321,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 
    ![Resource Group Created](images/RG4.png)
 
-### Task 6: Add Resource tag to the Security Group
+### Task 5: Add Resource tag to the Security Group
 
 In this section, you will add a Resource tag to the fabmedical-build-agent security group. Because we created the security group using the launch wizard, we were not able to set tags. This can make it easy to forget to clean up the security group, because it will not show up in a resource group search.
 
@@ -373,7 +346,7 @@ In this section, you will add a Resource tag to the fabmedical-build-agent secur
 
     ![Security Group Tags](images/ex0-image47.jpg)
 
-### Task 7: Connect securely to the build agent
+### Task 6: Connect securely to the build agent
 
 In this section, you will validate that you can connect to the new build agent VM.
 
@@ -385,14 +358,13 @@ In this section, you will validate that you can connect to the new build agent V
 
     ![VM IP Address](images/ex0-image49.jpg)
 
-3. From your local machine, launch Git Bash and navigate to your user directory c:\\Users\\\[your username\] where the key pair was previously created.
-4. Connect to the new VM you created by typing the following command.
+3. From your WSL terminal, connect to the new VM you created by typing the following command.
 
-    `ssh -i [PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
+    `ssh -i .ssh/[PRIVATEKEYNAME] [BUILDAGENTUSERNAME]@[BUILDAGENTIP]`
 
     Use the private key name such as “fabmedical\_rsa”, the username for the VM such as “ubuntu”, and the IP address for the build agent VM.
 
-    `$ ssh -i fabmedical_rsa ubuntu@54.202.82.171`
+    `ssh -i .ssh/fabmedical ubuntu@52.34.187.56`
 
 5. You will be asked to confirm if you want to connect, as the authenticity of the connection cannot be validated. Type “yes”.
 
@@ -400,13 +372,13 @@ In this section, you will validate that you can connect to the new build agent V
 
 7. You will now be connected to the VM with a command prompt such as the following. Keep this command prompt open for the next step.
 
-    `ubuntu@ip-172-31-16-103:~\$`
+    `ubuntu@ip-172-31-16-103:~$`
 
-    ![SSH Remote Session](images/ex0-image51.jpg)
+    ![SSH Remote Session](images/ex0-image51.png)
 
     > **NOTE: If you have issues connecting, you may have pasted the imported the SSH public key** **into EC2** **incorrectly.** **Unfortunately, if this is the case, you** **must** **retry the import, then try to create the VM again.**
 
-### Task 8: Complete the build agent setup
+### Task 7: Complete the build agent setup
 
 In this task, you will update the packages and install Docker engine.
 
@@ -466,7 +438,7 @@ In this task, you will update the packages and install Docker engine.
 
     ![WSL](images/ex0-task8-image_04.png)
 
-### Task 9: Create a Docker Hub account
+### Task 8: Create a Docker Hub account
 
 Docker images are deployed from a Docker Registry.
 To complete the lab, you will need access to a registry that is publicly accessible to the AWS Cloud cluster you are creating.
@@ -487,79 +459,50 @@ In this task, you will create a free Docker Hub account for this purpose, where 
 
     ![Welcome to DockerHub](images/ex0-image59.jpg)
 
-### Task 10: Create an EC2 Container Service cluster
+### Task 9: Create an Elastic Container Service cluster
 
-In this task, you will create your EC2 Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
+In this task, you will create your Elastic Container Service cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
 
-1. From the AWS Console home page search for EC2. Choose “EC2 Container Service”.
+1. From the AWS Console home page search for "container". Choose “Elastic Container Service”.
 
-    ![ECS Search](images/ex0-image60.jpg)
+    ![ECS Search](images/ex0-image60.png)
 
-2. On the EC2 Container Service getting started page, click “Get started”.
+1. On the Elastic Container Service getting started page, click “Clusters” on the left hand menu.
 
-    ![ECS getting started](images/ex0-image61.jpg)
+    ![ECS getting started](images/ex0-image61.png)
 
-3. Choose to deploy the sample application to a new cluster. Uncheck the box for Amazon ECR.
+1. Click "Create Cluster"
 
-    ![ECS options](images/ex0-image62.jpg)
+    ![ECS](images/ecs-create-cluster.png)
+    
+1. Choose the `EC2 Linux + Networking` cluster template then click "Next Step"
 
-4. Accept the default options for the task definition and click next.
-5. Accept the default options for the service configuration and click next.
-6. Configure the cluster. Then click “Review & launch”.
+    > Note: As of this writing different AWS regions have different capabilities and UI versions, therefore screenshots may vary slightly depending on your region of choice.
+    
+    ![ECS](images/ec2-linux-template.png)
 
-    * Use “fabmedical” as the cluster name.
-    * Set number of instances to “2”.
-    * Choose “fabmedical\_rsa” as the key pair.
-    * Accept default value for the security group.
-    * Note that the wizard will create a role called “ecsInstanceRole”
+1. Configure the cluster as described below then click "Create"
+    * Cluster name: fabmedical    
+    * Instance Configuration
+        * Provisioning Model: On-Demand instance
+        * EC2 Instance Type: Select t2.micro
+        * Number of instances: 2
+        * EBS storage (GiB): 22 
+        * Key pair: Select fabmedical_rsa
+    * Networking
+        * VPC: Create a new VPC
+        * CIDR block: 10.0.0.0/16
+        * Subnet 1: 10.0.0.0/24
+        * Subnet 2: 10.0.1.0/24
+        * Security group inbound rules
+            * CIDR block: 0.0.0.0/0
+            * Port range: 80
+    * Container instance IAM role: Create new role
+    
+    ![ECS](images/ecs-config.png)
+    
+1. Click "View Cluster" when the cluster deployment completes.
 
-        ![ECS Configure Cluster](images/ex0-image63.jpg)
-
-7. Click “Launch instance & run service”. The launch wizard will start the creation of several resources and this will take some time. When the allocation is complete, the “View Service” button will enable.
-
-    ![Launch Status](images/ex0-image64.jpg)
-
-8. Click “View Service” when it becomes available. Then click on the running task ID.
-
-    ![Task List](images/ex0-image65.jpg)
-
-9. Expand the disclosure triangle next to the “simple-app” container. Then click the External Link.
-
-    ![Container IP](images/ex0-image66.jpg)
-
-10. You should see a web page showing the sample app when the cluster is ready. It can take up to 30 minutes or more before your EC2 Container Service cluster is fully available.
-
-    ![Sample Web App](images/ex0-image72.jpg)
+    ![ECS](images/view-cluster.png)
 
     > **NOTE: If you experience errors related to lack of available** **VMs, you may have to delete some other compute resources or request** **that Amazon raise the EC2 instance limit for your account. Changing to another region** **is a simple way around this limit, as the limit is assessed** **per region. Choose one of these options and try this again.**
-
-### Task 11: Cleanup sample app
-
-In this task, you will remove the sample app service.
-Simple though it is, this service is using resources you will need during the lab but you'll want to know how to remove them later.
-
-1. Navigate to the ECS home page, then choose the “fabmedical”.
-
-    ![fabmedical cluster](images/ex0-image74.jpg)
-
-2. Check the checkmark next to the “simple-webapp” service. Then choose Update.
-
-    ![Update Service Button](images/ex0-image75.jpg)
-
-3. Change the number of tasks to 0. Then click “Update Service”
-
-    ![Update Service](images/ex0-image76.jpg)
-
-4. On the next screen click “View Service”. Refresh the deployment list until the running count reaches 0.
-
-    ![Service Deployments](images/ex0-image77.jpg)
-
-5. When the Running count reaches 0, you can click “Delete”.
-
-    ![Delete Service](images/ex0-image78.jpg)
-
-6. Next, confirm that you want to delete the service.
-
-    You have deleted the service and receive the confirmation message as shown below.
-
-    ![Service Deleted](images/ex0-image79.jpg)
