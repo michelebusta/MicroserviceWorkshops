@@ -517,7 +517,7 @@ FabMedical has provided starter files for you. They have taken a copy of one of 
 2. Download the starter files to the build agent by typing the following curl instruction (case sensitive): 
 
     ```bash
-    curl -L -o FabMedical.tgz http://bit.ly/2IyjeYl
+    curl -L -o FabMedical.tgz https://bit.ly/2lWzQS2
     ```
 
 3. Create a new directory named FabMedical by typing in the following command:
