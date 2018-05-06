@@ -491,12 +491,12 @@ In later exercises, you will need the Kubernetes CLI (kubectl) to deploy to your
 
 FabMedical has provided starter files for you. They have taken a copy of one of their web sites, for their customer Contoso Neuro, and refactored it from a single node.js site into a web site with a content API that serves up the speakers and sessions. This is a starting point to validate the containerization of their web sites. They have asked you to use this as the starting point for helping them complete a POC that helps to validate the development workflow for running the web site and API as Docker containers, and managing them within container platform.
 
-1. From Git Bash, connect to the build agent VM as you did previously in this Exercise, using the SSH command.
+1. From WSL, connect to the build agent VM as you did previously in Task 6.
 
-2. Download the starter files to the build agent by typing the following curl instruction (case sensitive):
+2. Download the starter files to the build agent by typing the following curl instruction (case sensitive): 
 
     ```bash
-    curl -L -o FabMedical.tgz https://bit.ly/2lWzQS2
+    curl -L -o FabMedical.tgz http://bit.ly/2IyjeYl
     ```
 
 3. Create a new directory named FabMedical by typing in the following command:
@@ -511,19 +511,18 @@ FabMedical has provided starter files for you. They have taken a copy of one of 
     tar -C FabMedical -xzf FabMedical.tgz
     ```
 
-    > NOTE: Keep this Git Bash window open as your build agent SSH connection. You will later open new Git Bash sessions to other machines.
+    NOTE: Keep this WSL window open as your build agent SSH connection. During the lab you will later open new WSL sessions to other machines.
 
-5. Validate the sample files
-
-    Navigate to FabMedical folder and list the contents.
+5. Navigate to FabMedical folder and list the contents.
 
     ```bash
     cd FabMedical
+    ll
     ```
 
-    You’ll see the listing includes two folders, one for the web site and another for the content API.
+6. You’ll see the listing includes two folders, one for the web site and another for the content API.
 
     ```bash
-    /content-api
-    /content-web
+    content-api/
+    content-web/
     ```
