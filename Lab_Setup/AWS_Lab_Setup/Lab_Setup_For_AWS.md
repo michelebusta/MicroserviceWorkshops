@@ -1,6 +1,6 @@
 # AWS Lab Setup
 
-> LAST UPDATED: 4/26/2018
+> LAST UPDATED: 5/6/2018
 
 This document describes all of the preparation you should take care of prior to the workshop.
 If you do not have time, you may work on this during the workshop but may not complete as many lab steps
