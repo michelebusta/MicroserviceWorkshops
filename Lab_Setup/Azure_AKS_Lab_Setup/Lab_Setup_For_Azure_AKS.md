@@ -43,6 +43,7 @@ The lab will make use of several tools and services.  Here is a list of requirem
 * Task 10: Create an Azure Container Service cluster
 * Task 11: Install Azure CLI
 * Task 12: Install Kubernetes CLI
+* Task 13: Download the sample source
 
 ## Create Azure Account
 
@@ -253,6 +254,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
 In this section, you will validate that you can connect to the new build agent VM.
 
 1. From the Azure portal, navigate to the Resource Group you created previously and select the new VM, fabmedical-SUFFIX.
+
 2. In the Overview area for the VM, take note of the public IP address for the VM.
 
     ![Microsoft Azure](images/ex0-task6-image_01.png)
@@ -484,3 +486,44 @@ In later exercises, you will need the Kubernetes CLI (kubectl) to deploy to your
     `az login`
 
     `sudo az acs kubernetes install-cli --install-location /usr/local/bin/kubectl`
+
+### Task 13: Download the sample source
+
+FabMedical has provided starter files for you. They have taken a copy of one of their web sites, for their customer Contoso Neuro, and refactored it from a single node.js site into a web site with a content API that serves up the speakers and sessions. This is a starting point to validate the containerization of their web sites. They have asked you to use this as the starting point for helping them complete a POC that helps to validate the development workflow for running the web site and API as Docker containers, and managing them within container platform.
+
+1. From Git Bash, connect to the build agent VM as you did previously in this Exercise, using the SSH command.
+
+2. Download the starter files to the build agent by typing the following curl instruction (case sensitive):
+
+    ```bash
+    curl -L -o FabMedical.tgz https://bit.ly/2lWzQS2
+    ```
+
+3. Create a new directory named FabMedical by typing in the following command:
+
+    ```bash
+    mkdir FabMedical
+    ```
+
+4. Unpack the archive with the following command. This will extract the files from the archive to the FabMedical directory you created. The directory is case sensitive when you navigate to it.
+
+    ```bash
+    tar -C FabMedical -xzf FabMedical.tgz
+    ```
+
+    > NOTE: Keep this Git Bash window open as your build agent SSH connection. You will later open new Git Bash sessions to other machines.
+
+5. Validate the sample files
+
+    Navigate to FabMedical folder and list the contents.
+
+    ```bash
+    cd FabMedical
+    ```
+
+    You’ll see the listing includes two folders, one for the web site and another for the content API.
+
+    ```bash
+    /content-api
+    /content-web
+    ```

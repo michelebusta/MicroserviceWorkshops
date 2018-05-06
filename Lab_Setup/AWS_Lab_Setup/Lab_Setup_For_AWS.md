@@ -41,6 +41,7 @@ The lab will make use of several tools and services.  Here is a list of requirem
 * Task 7: Complete the build agent setup
 * Task 8: Create a Docker Hub account
 * Task 9: Create an EC2 Container Service cluster
+* Task 10: Download the sample source
 
 ## Create an AWS Account
 
@@ -467,21 +468,21 @@ In this task, you will create your Elastic Container Service cluster. You will u
 
     ![ECS Search](images/ex0-image60.png)
 
-1. On the Elastic Container Service getting started page, click “Clusters” on the left hand menu.
+2. On the Elastic Container Service getting started page, click “Clusters” on the left hand menu.
 
     ![ECS getting started](images/ex0-image61.png)
 
-1. Click "Create Cluster"
+3. Click "Create Cluster"
 
     ![ECS](images/ecs-create-cluster.png)
-    
-1. Choose the `EC2 Linux + Networking` cluster template then click "Next Step"
+
+4. Choose the `EC2 Linux + Networking` cluster template then click "Next Step"
 
     > Note: As of this writing different AWS regions have different capabilities and UI versions, therefore screenshots may vary slightly depending on your region of choice.
-    
+
     ![ECS](images/ec2-linux-template.png)
 
-1. Configure the cluster as described below then click "Create"
+5. Configure the cluster as described below then click "Create"
     * Cluster name: fabmedical    
     * Instance Configuration
         * Provisioning Model: On-Demand instance
@@ -498,11 +499,52 @@ In this task, you will create your Elastic Container Service cluster. You will u
             * CIDR block: 0.0.0.0/0
             * Port range: 80
     * Container instance IAM role: Create new role
-    
+
     ![ECS](images/ecs-config.png)
-    
-1. Click "View Cluster" when the cluster deployment completes.
+
+6. Click "View Cluster" when the cluster deployment completes.
 
     ![ECS](images/view-cluster.png)
 
     > **NOTE: If you experience errors related to lack of available** **VMs, you may have to delete some other compute resources or request** **that Amazon raise the EC2 instance limit for your account. Changing to another region** **is a simple way around this limit, as the limit is assessed** **per region. Choose one of these options and try this again.**
+
+### Task 10: Download the sample source
+
+FabMedical has provided starter files for you. They have taken a copy of one of their web sites, for their customer Contoso Neuro, and refactored it from a single node.js site into a web site with a content API that serves up the speakers and sessions. This is a starting point to validate the containerization of their web sites. They have asked you to use this as the starting point for helping them complete a POC that helps to validate the development workflow for running the web site and API as Docker containers, and managing them within container platform.
+
+1. From Git Bash, connect to the build agent VM as you did previously in this Exercise, using the SSH command.
+
+2. Download the starter files to the build agent by typing the following curl instruction (case sensitive):
+
+    ```bash
+    curl -L -o FabMedical.tgz http://bit.ly/TODO:
+    ```
+
+3. Create a new directory named FabMedical by typing in the following command:
+
+    ```bash
+    mkdir FabMedical
+    ```
+
+4. Unpack the archive with the following command. This will extract the files from the archive to the FabMedical directory you created. The directory is case sensitive when you navigate to it.
+
+    ```bash
+    tar -C FabMedical -xzf FabMedical.tgz
+    ```
+
+    > NOTE: Keep this Git Bash window open as your build agent SSH connection. You will later open new Git Bash sessions to other machines.
+
+5. Validate the sample files
+
+    Navigate to FabMedical folder and list the contents.
+
+    ```bash
+    cd FabMedical
+    ```
+
+    You’ll see the listing includes two folders, one for the web site and another for the content API.
+
+    ```bash
+    /content-api
+    /content-web
+    ```
