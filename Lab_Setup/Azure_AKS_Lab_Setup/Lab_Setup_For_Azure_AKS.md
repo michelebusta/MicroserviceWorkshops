@@ -350,6 +350,9 @@ In this task, you will update the packages and install Docker engine.
 
 You deploy Docker images from a registry. To complete the lab, you will need access to a registry that is accessible to the Azure Container Service cluster you are creating. In this task, you will create an Azure Container Registry (ACR) for this purpose, where you push images for deployment.
 
+> NOTE: You may have to register your subscription as of the BUILD conference, before the following steps will work, see this link:
+https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough#enabling-aks-preview
+
 1. In the [Azure Portal](https://portal.azure.com), select + Create a resource, Containers, then click Azure Container Registry.
 
     ![Microsoft Azure](images/ex0-task8-image_01.png)
