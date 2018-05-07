@@ -455,6 +455,21 @@ In this task, you will create your Azure Container Service (AKS) cluster. You wi
 
 > NOTE: If you experience errors related to lack of available cores, you may have to delete some other compute resources or request additional cores to your subscription and then try this again.
 
+```text
+NOTE: the following az aks create command is an alternate way to create the cluster
+
+az aks create `
+    --verbose `
+    --output table `
+    --kubernetes-version 1.9.2 `
+    --node-count 4 `
+    --name ${CLUSTER_NAME} `
+    --resource-group ${RESOURCE_GROUP_NAME} `
+    --client-secret ${SP_PASSWORD} `
+    --service-principal ${SP_APP_ID} `
+    --ssh-key-value ${SSH_KEY_PATH}
+```
+
 ### Task 11: Install Azure CLI
 
 In later exercises, you will need the Azure CLI 2.0 to connect to your Kubernetes cluster and run commands from your local machine. A complete list of instructions for supported platforms is available on this page:
