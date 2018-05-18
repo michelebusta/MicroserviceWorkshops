@@ -6,22 +6,12 @@ If you are just looking to learn how to set up an environment on any of the belo
 > UPCOMING WORKSHOPS:
 
 ```text
-May 7-8
-2-day workshop
-Developing and Deploying ASP.NET Core Docker Applications - Hands On
-NDC {Minnesota}, Saint Paul, MN
-
-Relevant labs: Azure AKS, Azure DC/OS, AWS EC2
-```
-
-https://ndcminnesota.com/speaker/michele-bustamante
-
-```text
 May 22
 1-day workshop
 ASP.NET Core and Docker on Azure - from development through deployment
 Techorama, Antwerp, Belgium
 
+NOTE: this is not a hands-on workshop but I am sharing these labs for your own time :) Have fun!
 Relevant labs: Azure AKS, Azure DC/OS
 ```
 
@@ -29,7 +19,7 @@ https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deploy
 
 -----
 
-> DOWNLOADS: TO BE UPDATED FOR NDC MINNESOTA BY MAY 5TH, 2018
+> DOWNLOADS: UPDATED MAY 18, 2018
 
 ```text
 See your bit.ly link from the workshop you attended for updates.
@@ -37,12 +27,12 @@ Also please note there will be a README file with any pertintent
 updates such as new workshop files from more recent updates provided as the platforms change. 
 
 
-Bit.ly last updated March 31, 2018. Stay tuned for another update during April 2018.
+Bit.ly last updated May 18, 2018. 
 ```
 
 -----
 
-There are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
+In ALL, there are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
 
 ## Choose your platform for the workshop lab
