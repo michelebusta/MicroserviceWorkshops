@@ -1,6 +1,6 @@
 # Azure Container Service (AKS) Lab Setup
 
-> LAST UPDATED: 5/6/2018
+> LAST UPDATED: 5/19/2018
 
 This document describes all of the preparation you should take care of prior to the workshop.
 If you do not have time, you may work on this during the workshop but may not complete as many lab steps
@@ -237,6 +237,7 @@ In this section, you will create a Linux VM to act as your build agent. You will
     ![Microsoft Azure](images/ex0-task5-image_04.png)
 
 5. From the Settings blade, accept the default values for all settings and select OK.
+
 6. From the Create blade, you should see that validation passed and select Create.
 
     ![Microsoft Azure](images/ex0-task5-image_05.png)
@@ -314,6 +315,7 @@ In this task, you will update the packages and install Docker engine.
 7. When the command has completed, check the Docker version installed by executing this command. The output may look something like that shown in the following screen shot. Note that the server version is not shown yet, because you didn’t run the command with elevated privileges (to be addressed shortly).
 
     `docker version`
+
     ![WSL](images/ex0-task7-image_01.png)
 
 8. You may check the versions of node.js and npm as well, just for information purposes, using these commands.
@@ -325,6 +327,7 @@ In this task, you will update the packages and install Docker engine.
 9. Add your user to the Docker group so that you do not have to elevate privileges with sudo for every command. You can ignore any errors you see in the output.
 
     `sudo usermod -aG docker $USER`
+
     ![WSL](images/ex0-task7-image_02.png)
 
 10. In order for the user permission changes to take effect, exit the SSH session by typing ‘exit’, then press \<Enter>. Repeat the commands in Task 6: Connect securely to the build agent from step 4 to establish the SSH session again.
@@ -413,40 +416,48 @@ Azure Container Service requires an Azure Active Directory service principal to 
 
 In this task, you will create your Azure Container Service (AKS) cluster. You will use the same SSH key you created previously to connect to this cluster in the next task.
 
-> NOTE: In this step, you will be asked to create a second Resource Group as part of the template for creating the Azure Container Service cluster. This is due to the current template not providing the option to select an existing Resource Group, and this may change in the future.
-
 1. From the Azure Portal, select + Create a resource, Containers and select Azure Container Service - AKS.
 
     ![Microsoft Azure](images/ex0-task10-image_01.png)
 
-2. In the Basics blade provide the information shown in the screenshot that follows:
+2. In the Basics blade provide the information shown in the screenshots that follows:
 
-    * Name: Enter fabmedical-SUFFIX.
-    * DNS Prefix: Enter fabmedical-SUFFIX.
-    * Kubernetes version: keep default.
+    > Note: you may need to scroll to see all values.
+
     * Subscription: Choose your subscription which you have been using throughout the lab.
-    * Resource group: Create new and provide a unique name. Since the template does not support using an existing Resource Group, provide a new name such adding a “2” to the suffix, such as fabmedical-SUFFIX-2.
-    * Location: Choose a location.
+    * Resource group: Select the resource group you have been using through the lab.    
+    * Name: Enter fabmedical-SUFFIX.
+    * Region: Choose the same region as the resource group.
+    * Kubernetes version: 1.9.6.
+    * DNS Prefix: Enter fabmedical-SUFFIX.
 
         ![Microsoft Azure](images/ex0-task10-image_02.png)
+        
+    * Configure your service principal
+        * Service principal client ID: Use the service principal “appId” from the previous step.
+        * Service principal client secret: Use the service principal “password” from the previous step.
 
-3. Select OK.
-4. On the Configuration blade provide:
+            ![Microsoft Azure](images/2018-05-19_08-31-32.png)  
+             
+    * Configure your VM size
+    
+        * Click "Chagnge Size"
+        * Search for "D2"
+        * Select "D2_v2"
+         
+            ![Microsoft Azure](images/2018-05-19_08-33-41.png) 
+            
+    * Set the Node Count to 2
+    
+        ![Microsoft Azure](images/2018-05-19_08-34-12.png) 
+                 
+1. Click "Next: Networking".
+1. Keep the defaults and click "Next: Monitoring"
+1. Keep the defaults and click "Next: Tags"
+1. Keep the defaults and click "Review + create"
+1. You should see that validation passed; Click "Create".
 
-    * User name: Enter adminfabmedical
-    * SSH Public Key: Paste the same SSH public key (fabmedical.pub) you used for the agent VM previously.
-    * Service principal client ID: Use the service principal “appId” from the previous step.
-    * Service principal client secret: Use the service principal “password” from the previous step.
-    * Node count: 2
-    * Node virtual machine size: Standard DS2_V2
-    * OS Disk Size: leave empty
-
-        ![Microsoft Azure](images/ex0-task10-image_03.png)
-
-5. Select OK.
-6. On the Summary blade, you should see that validation passed; select OK.
-
-    ![Microsoft Azure](images/ex0-task10-image_04.png)
+    ![Microsoft Azure](images/2018-05-19_08-36-14.png)
 
 7. The Azure Container Service cluster will begin deployment to your Azure subscription.
 
@@ -457,20 +468,21 @@ In this task, you will create your Azure Container Service (AKS) cluster. You wi
     ![Microsoft Azure](images/ex0-task10-image_06.png)
 
 > NOTE: If you experience errors related to lack of available cores, you may have to delete some other compute resources or request additional cores to your subscription and then try this again.
+---
+> ALTERNATIVE: the following az aks create command is an alternate way to create the cluster. (requires the azure cli, which you will install in the next step)
 
-```text
-NOTE: the following az aks create command is an alternate way to create the cluster
-
-az aks create `
-    --verbose `
-    --output table `
-    --kubernetes-version 1.9.2 `
-    --node-count 4 `
-    --name ${CLUSTER_NAME} `
-    --resource-group ${RESOURCE_GROUP_NAME} `
-    --client-secret ${SP_PASSWORD} `
-    --service-principal ${SP_APP_ID} `
-    --ssh-key-value ${SSH_KEY_PATH}
+```bash
+az aks create \
+    --verbose \
+    --output table \
+    --kubernetes-version 1.9.6 \
+    --node-count 2 \
+    --node-vm-size Standard_D2_v2_Promo \
+    --name fabmedical-${SUFFIX} \
+    --resource-group fabmedical-${SUFFIX} \
+    --client-secret ${SP_PASSWORD} \
+    --service-principal ${SP_APP_ID} \
+    --ssh-key-value .ssh/fabmedical.pub
 ```
 
 ### Task 11: Install Azure CLI
