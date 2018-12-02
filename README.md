@@ -17,6 +17,9 @@ https://azureaiconf.com
 
 -----
 
+> NOTE: use this link for the lab at azureaiconf.com: 
+https://github.com/michelebusta/MCW-Containers-and-DevOps/
+
 In ALL, there are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
 
