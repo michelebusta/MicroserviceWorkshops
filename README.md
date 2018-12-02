@@ -1,34 +1,19 @@
 # Workshop Lab README
 
 This folder contains setup instructions to set up ahead of my microservices workshop labs.
-If you are just looking to learn how to set up an environment on any of the below platforms, you can also feel free to follow these setup steps but the labs themselves are only shared with attendees.
+If you are just looking to learn how to set up an environment on any of the below platforms, you can also feel free to follow these setup steps but the labs themselves are only shared with attendees with the exception of the public labs produced for Microsoft by our team, which are now public domain as noted here.
 
 > UPCOMING WORKSHOPS:
 
 ```text
-May 22
-1-day workshop
-ASP.NET Core and Docker on Azure - from development through deployment
-Techorama, Antwerp, Belgium
-
-NOTE: this is not a hands-on workshop but I am sharing these labs for your own time :) Have fun!
-Relevant labs: Azure AKS, Azure DC/OS
+Dec 2018
+2-day workshop
+Up your Microservices Game with Asp.NET Core, Docker and Azure
+NOTE: there is limited time for hands on in the workshop but the labs are there to get started with.
+Relevant labs: Azure AKS
 ```
 
-https://techorama.be/blog/workshops/asp-net-core-docker-azure-development-deployment/
-
------
-
-> DOWNLOADS: UPDATED MAY 18, 2018
-
-```text
-See your bit.ly link from the workshop you attended for updates.
-Also please note there will be a README file with any pertintent
-updates such as new workshop files from more recent updates provided as the platforms change. 
-
-
-Bit.ly last updated May 18, 2018. 
-```
+https://azureaiconf.com
 
 -----
 
@@ -49,6 +34,8 @@ You'll choose from the following environments:
 * Google Cloud with Google Container Engine 
 * Azure Service Fabric
 * Azure with Docker Enterprise Edition (COMING SOON)
+
+> NOTE: for the AKS lab, just follow the one folder, now that it is public domain the structure has changed.
 
 ## Prerequisite setup steps
 
