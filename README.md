@@ -6,22 +6,21 @@ If you are just looking to learn how to set up an environment on any of the belo
 > UPCOMING WORKSHOPS:
 
 ```text
-Dec 2018
+February 26 and 27, 2019
 2-day workshop
-Up your Microservices Game with Asp.NET Core, Docker and Azure
+Surviving development, DevOps and production with Docker and Kubernetes
 NOTE: there is limited time for hands on in the workshop but the labs are there to get started with.
-Relevant labs: Azure AKS
+Relevant labs: Azure AKS, AWS AKS
 ```
 
-https://azureaiconf.com
+https://ndcporto.com/workshop/surviving-development-devops-and-production-with-docker-and-kubernetes
 
 -----
 
-> NOTE: use this link for the lab at azureaiconf.com: 
-https://github.com/michelebusta/MCW-Containers-and-DevOps/
-
-In ALL, there are 4 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
+In ALL, there are 5 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
+
+> NOTE: these labs are maintained based on demand for workshops so some may be more current than others, be aware that the steps do change and screenshots become out of date. Any lab actively delivered in a workshop, is up to date before that workshop :)
 
 ## Choose your platform for the workshop lab
 
@@ -32,9 +31,10 @@ Each workshop focuses on different platforms, and this will be indicated in the 
 You'll choose from the following environments:
 
 * Azure Container Service (AKS) with Kubernetes
-* Azure Container Service with DC / OS
+* AWS with EKS
 * AWS with EC2 Container Services
 * Google Cloud with Google Container Engine 
+* Azure Container Service with DC / OS
 * Azure Service Fabric
 * Azure with Docker Enterprise Edition (COMING SOON)
 
@@ -51,7 +51,7 @@ You must follow the steps EXACTLY as written to avoid running into issues during
 
 When you get to the workshop.
 
-A document describing the steps for each lab will be provided. You will be given some time to do work in the workshop but also to continue offline at your own pace. 
+A document describing the steps for each lab will be provided. You will be given some time to do work in the workshop but also to continue offline at your own pace.
 
 The goal is to show similar deployments of a simple web app / api to a container platform whereby we go through the following:
 
