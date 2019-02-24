@@ -6,7 +6,7 @@
 ## Setup
 
 UPDATE: the location below from Microsoft is not currently up to date since there have been UI changes, please follow this one for now; an update from our team at Solliance: 
-https://github.com/michelebusta/MCW-Containers-and-DevOps/pull/1
+https://github.com/jamesrcounts/MCW-Containers-and-DevOps
 
 IGNORE FOR NOW: See the instructions at this location:
 [MCW - Containers and DevOps Lab](https://github.com/Microsoft/MCW-Containers-and-DevOps)
