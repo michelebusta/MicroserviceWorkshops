@@ -20,13 +20,7 @@ ISSUES:
 
 ```text
 #1 issue running content-web
-the problem is that the local machine has to have a higher version of node.js until the package.json is updated to fix that all packages are on the latest
-
-do the following workaround on your linux / ios machine:
-
-sudo npm cache clean -f
-sudo npm install -g n
-sudo n stable
+Change the Dockerfile base image to use node:8 instead of node:alpine
 
 ```
 -----
