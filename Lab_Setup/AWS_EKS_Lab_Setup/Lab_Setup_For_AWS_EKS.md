@@ -716,13 +716,13 @@ Now you can create your Amazon EKS cluster.
    * `Subnets`: The `SubnetIds` values (comma-separated) from the AWS CloudFormation output that you generated with [Create your Amazon EKS Cluster VPC](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#vpc-create). By default, the available subnets in the above VPC are preselected.
    * `Security Groups`: The `SecurityGroups` value from the AWS CloudFormation output that you generated with [Create your Amazon EKS Cluster VPC](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#vpc-create). This security group has `ControlPlaneSecurityGroup` in the drop-down name.
 
-  `Important`
+   > **Important**
+   >
+   > The worker node AWS CloudFormation template modifies the security group that you specify here, so we recommend that you use a dedicated security group for your cluster control plane. If you share it with other resources, you may block or disrupt connections to those resources.
 
-    The worker node AWS CloudFormation template modifies the security group that you specify here, so we recommend that you use a dedicated security group for your cluster control plane. If you share it with other resources, you may block or disrupt connections to those resources.
-
-  `Note`
-
-    You may receive an error that one of the Availability Zones in your request does not have sufficient capacity to create an Amazon EKS cluster. If this happens, the error output contains the Availability Zones that can support a new cluster. Retry creating your cluster with at least two subnets that are located in the supported Availability Zones for your account.
+   > **NOTE**
+   >
+   > You may receive an error that one of the Availability Zones in your request does not have sufficient capacity to create an Amazon EKS cluster. If this happens, the error output contains the Availability Zones that can support a new cluster. Retry creating your cluster with at least two subnets that are located in the supported Availability Zones for your account.
 
 4. On the `Clusters` page, choose the name of your newly created cluster to view the cluster information.
 5. The `Status` field shows `CREATING` until the cluster provisioning process completes.
@@ -735,20 +735,21 @@ Now you can create your Amazon EKS cluster.
     aws eks create-cluster --name devel --role-arn arn:aws:iam::111122223333:role/eks-service-role-AWSServiceRoleForAmazonEKS-EXAMPLEBKZRQR --resources-vpc-config subnetIds=subnet-a9189fe2,subnet-50432629,securityGroupIds=sg-f5c54184 --region us-west-2
     ```
 
-  `Important`
+   > **Important**
+   >
+   > If you receive a syntax error similar to the following, you may be using a preview version of the AWS CLI for Amazon EKS. The syntax for many Amazon EKS commands has changed since the public service launch. Please update your AWS CLI version to the latest available and be sure to delete the custom service model directory at `~/.aws/models/eks`.
 
-  If you receive a syntax error similar to the following, you may be using a preview version of the AWS CLI for Amazon EKS. The syntax for many Amazon EKS commands has changed since the public service launch. Please update your AWS CLI version to the latest available and be sure to delete the custom service model directory at `~/.aws/models/eks`.
+   ```bash
+   aws: error: argument --cluster-name is required
+   ```
 
-  ```bash
-  aws: error: argument --cluster-name is required
-  ```
+   > **NOTE**
+   >
+   > If your IAM user does not have administrative privileges, you must explicitly add permissions for that user to call the Amazon EKS API operations. For more information, see [Creating Amazon EKS IAM Policies](https://docs.aws.amazon.com/eks/latest/userguide/EKS_IAM_user_policies.html).
 
-  `Note`
+   Output:
 
-  If your IAM user does not have administrative privileges, you must explicitly add permissions for that user to call the Amazon EKS API operations. For more information, see [Creating Amazon EKS IAM Policies](https://docs.aws.amazon.com/eks/latest/userguide/EKS_IAM_user_policies.html).
-
-  Output:
-
+   ```text
     {
         "cluster": {
             "name": "devel",
@@ -770,6 +771,7 @@ Now you can create your Amazon EKS cluster.
             "certificateAuthority": {}
         }
     }
+   ```
 
 2. Cluster provisioning usually takes less than 10 minutes. You can query the status of your cluster with the following command. When your cluster status is ACTIVE, you can proceed.
 
@@ -785,19 +787,19 @@ In this section, you create a `kubeconfig` file for your cluster with the AWS CL
 
 1. Ensure that you have at least version 1.16.73 of the AWS CLI installed. To install or upgrade the AWS CLI, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the *AWS Command Line Interface User Guide*.
 
-  `Note`
+   > **NOTE**
+   >
+   > Your system's Python version must be Python 3, or Python 2.7.9 or greater.  Otherwise, you receive `hostname doesn't match` errors with AWS CLI calls to Amazon EKS. For more information, see [What are "hostname doesn't match" errors?](http://docs.python-requests.org/en/master/community/faq/#what-are-hostname-doesn-t-match-errors) in the Python Requests FAQ.
 
-  Your system's Python version must be Python 3, or Python 2.7.9 or greater.  Otherwise, you receive `hostname doesn't match` errors with AWS CLI calls to Amazon EKS. For more information, see [What are "hostname doesn't match" errors?](http://docs.python-requests.org/en/master/community/faq/#what-are-hostname-doesn-t-match-errors) in the Python Requests FAQ.
+   You can check your AWS CLI version with the following command:
 
-  You can check your AWS CLI version with the following command:
+   ```bash
+   aws --version
+   ```
 
-  ```bash
-  aws --version
-  ```
-
-  `Important`
-
-  Package managers such as `yum`, `apt-get`, or Homebrew for macOS are often behind several versions of the AWS CLI. To ensure that you have the latest version, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the *AWS Command Line Interface User Guide*.
+   > **Important**
+   >
+   > Package managers such as `yum`, `apt-get`, or Homebrew for macOS are often behind several versions of the AWS CLI. To ensure that you have the latest version, see [Installing the AWS Command Line Interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html) in the *AWS Command Line Interface User Guide*.
 
 2. Use the AWS CLI `update-kubeconfig` command to create or update your kubeconfig for your cluster.
 
@@ -805,32 +807,34 @@ In this section, you create a `kubeconfig` file for your cluster with the AWS CL
     aws eks update-kubeconfig --name fabmedical-eks-cluster --region us-west-2
     ```
 
-  * By default, the resulting configuration file is created at the default kubeconfig path (.kube/config) in your home directory or merged with an existing kubeconfig at that location. You can specify another path with the `--kubeconfig` option.
-  * You can specify an IAM role ARN with the `--role-arn` option to use for authentication when you issue `kubectl` commands. Otherwise, the IAM entity in your default AWS CLI or SDK credential chain is used. You can view your default AWS CLI or SDK identity by running the `aws sts get-caller-identity` command.
-  * For more information, see the help page with the `aws eks update-kubeconfig help` command or see [update-kubeconfig](https://docs.aws.amazon.com/cli/latest/reference/eks/update-kubeconfig.html) in the *AWS CLI Command Reference*.
+   * By default, the resulting configuration file is created at the default kubeconfig path (.kube/config) in your home directory or merged with an existing kubeconfig at that location. You can specify another path with the `--kubeconfig` option.
+   * You can specify an IAM role ARN with the `--role-arn` option to use for authentication when you issue `kubectl` commands. Otherwise, the IAM entity in your default AWS CLI or SDK credential chain is used. You can view your default AWS CLI or SDK identity by running the `aws sts get-caller-identity` command.
+   * For more information, see the help page with the `aws eks update-kubeconfig help` command or see [update-kubeconfig](https://docs.aws.amazon.com/cli/latest/reference/eks/update-kubeconfig.html) in the *AWS CLI Command Reference*.
 
-  1. Test your configuration.
+3. Test your configuration.
 
-      ```bash
-      kubectl get svc
-      ```
+    ```bash
+    kubectl get svc
+    ```
 
-  `Note`
+   > **NOTE**
+   >
+   > If you receive the error `"aws-iam-authenticator": executable file not found in $PATH`, then your `kubectl` is not configured for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
 
-  If you receive the error `"aws-iam-authenticator": executable file not found in $PATH`, then your `kubectl` is not configured for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+   Output:
 
-  Output:
-
+    ```text
     NAME             TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
     kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   1m
+    ```
 
 ##### Launch and Configure Amazon EKS Worker Nodes
 
 Now that your VPC and Kubernetes control plane are created, you can launch and configure your worker nodes.
 
-`Important`
-
-Amazon EKS worker nodes are standard Amazon EC2 instance, and you are billed for them based on normal Amazon EC2 On-Demand Instance prices. For more information, see [Amazon EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/).
+> **Important**
+>
+> Amazon EKS worker nodes are standard Amazon EC2 instance, and you are billed for them based on normal Amazon EC2 On-Demand Instance prices. For more information, see [Amazon EC2 Pricing](https://aws.amazon.com/ec2/pricing/on-demand/).
 
 ###### To launch your worker nodes
 
@@ -878,49 +882,49 @@ Amazon EKS worker nodes are standard Amazon EC2 instance, and you are billed for
     * `NodeInstanceType`: Choose an instance type for your worker nodes.
     * `NodeImageId`: Enter the current Amazon EKS worker node AMI ID for your Region. The AMI IDs for the latest Amazon EKS-optimized AMI (with and without [GPU support](https://docs.aws.amazon.com/eks/latest/userguide/gpu-ami.html)) are shown in the following table.
 
-    `Note`
+      > **NOTE**
+      >
+      > The Amazon EKS-optimized AMI with GPU support only supports P2 and P3 instance types. Be sure to specify these instance types in your worker node AWS CloudFormation template. Because this AMI includes third-party software that requires an end user license agreement (EULA), you must subscribe to the AMI in the AWS Marketplace and accept the EULA before you can use the AMI in your worker node groups. To subscribe to the AMI, visit [the AWS Marketplace](https://aws.amazon.com/marketplace/pp/B07GRHFXGM).
+      >
+      > `Kubernetes version 1.11`
+      > 
+      > |`Region`                                 |`Amazon EKS-optimized AMI`|`with GPU support`     |
+      > |-----------------------------------------|--------------------------|-----------------------|
+      > |US West (Oregon) (us-west-2)             |*ami-09e1df3bad220af0b*   |*ami-0ebf0561e61a2be02*|
+      > |US East (N. Virginia) (us-east-1)        |*ami-04358410d28eaab63*   |*ami-0131c0ca222183def*|
+      > |US East (Ohio) (us-east-2)               |*ami-0b779e8ab57655b4b*   |*ami-0abfb3be33c196cbf*|
+      > |EU (Frankfurt) (eu-central-1)            |*ami-08eb700778f03ea94*   |*ami-000622b1016d2a5bf*|
+      > |EU (Stockholm) (eu-north-1)              |*ami-068b8a1efffd30eda*   |*ami-cc149ab2*         |
+      > |EU (Ireland) (eu-west-1)                 |*ami-0de10c614955da932*   |*ami-0dafd3a1dc43781f7*|
+      > |Asia Pacific (Tokyo) (ap-northeast-1)    |*ami-06398bdd37d76571d*   |*ami-0afc9d14b2fe11ad9*|
+      > |Asia Pacific (Seoul) (ap-northeast-2)    |*ami-08a87e0a7c32fa649*   |*ami-0d75b9ab57bfc8c9a*|
+      > |Asia Pacific (Singapore) (ap-southeast-1)|*ami-0ac3510e44b5bf8ef*   |*ami-0ecce0670cb66d17b*|
+      > |Asia Pacific (Sydney) (ap-southeast-2)   |*ami-0d2c929ace88cfebe*   |*ami-03b048bd9d3861ce9*|
+      >
+      > `Kubernetes version 1.10`
+      >
+      > |`Region`                                 |`Amazon EKS-optimized AMI`|`with GPU support`     |
+      > |-----------------------------------------|--------------------------|-----------------------|
+      > |US West (Oregon) (us-west-2)             |*ami-0a2abab4107669c1b*   |*ami-0c9e5e2d8caa9fb5e*|
+      > |US East (N. Virginia) (us-east-1)        |*ami-0c24db5df6badc35a*   |*ami-0ff0241c02b279f50*|
+      > |US East (Ohio) (us-east-2)               |*ami-0c2e8d28b1f854c68*   |*ami-006a12f54eaafc2b1*|
+      > |EU (Frankfurt) (eu-central-1)            |*ami-010caa98bae9a09e2*   |*ami-0d6f0554fd4743a9d*|
+      > |EU (Stockholm) (eu-north-1)              |*ami-06ee67302ab7cf838*   |*ami-0b159b75*         |
+      > |EU (Ireland) (eu-west-1)                 |*ami-01e08d22b9439c15a*   |*ami-097978e7acde1fd7c*|
+      > |Asia Pacific (Tokyo) (ap-northeast-1)    |*ami-0f0e8066383e7a2cb*   |*ami-036b3969c5eb8d3cf*|
+      > |Asia Pacific (Seoul) (ap-northeast-2)    |*ami-0b7baa90de70f683f*   |*ami-0b7f163f7194396f7*|
+      > |Asia Pacific (Singapore) (ap-southeast-1)|*ami-019966ed970c18502*   |*ami-093f742654a955ee6*|
+      > |Asia Pacific (Sydney) (ap-southeast-2)   |*ami-06ade0abbd8eca425*   |*ami-05e09575123ff498b*|
 
-    The Amazon EKS-optimized AMI with GPU support only supports P2 and P3 instance types. Be sure to specify these instance types in your worker node AWS CloudFormation template. Because this AMI includes third-party software that requires an end user license agreement (EULA), you must subscribe to the AMI in the AWS Marketplace and accept the EULA before you can use the AMI in your worker node groups. To subscribe to the AMI, visit [the AWS Marketplace](https://aws.amazon.com/marketplace/pp/B07GRHFXGM).
-
-    `Kubernetes version 1.11`
-
-    |`Region`                                 |`Amazon EKS-optimized AMI`|`with GPU support`     |
-    |-----------------------------------------|--------------------------|-----------------------|
-    |US West (Oregon) (us-west-2)             |*ami-09e1df3bad220af0b*   |*ami-0ebf0561e61a2be02*|
-    |US East (N. Virginia) (us-east-1)        |*ami-04358410d28eaab63*   |*ami-0131c0ca222183def*|
-    |US East (Ohio) (us-east-2)               |*ami-0b779e8ab57655b4b*   |*ami-0abfb3be33c196cbf*|
-    |EU (Frankfurt) (eu-central-1)            |*ami-08eb700778f03ea94*   |*ami-000622b1016d2a5bf*|
-    |EU (Stockholm) (eu-north-1)              |*ami-068b8a1efffd30eda*   |*ami-cc149ab2*         |
-    |EU (Ireland) (eu-west-1)                 |*ami-0de10c614955da932*   |*ami-0dafd3a1dc43781f7*|
-    |Asia Pacific (Tokyo) (ap-northeast-1)    |*ami-06398bdd37d76571d*   |*ami-0afc9d14b2fe11ad9*|
-    |Asia Pacific (Seoul) (ap-northeast-2)    |*ami-08a87e0a7c32fa649*   |*ami-0d75b9ab57bfc8c9a*|
-    |Asia Pacific (Singapore) (ap-southeast-1)|*ami-0ac3510e44b5bf8ef*   |*ami-0ecce0670cb66d17b*|
-    |Asia Pacific (Sydney) (ap-southeast-2)   |*ami-0d2c929ace88cfebe*   |*ami-03b048bd9d3861ce9*|
-
-    `Kubernetes version 1.10`
-
-    |`Region`                                 |`Amazon EKS-optimized AMI`|`with GPU support`     |
-    |-----------------------------------------|--------------------------|-----------------------|
-    |US West (Oregon) (us-west-2)             |*ami-0a2abab4107669c1b*   |*ami-0c9e5e2d8caa9fb5e*|
-    |US East (N. Virginia) (us-east-1)        |*ami-0c24db5df6badc35a*   |*ami-0ff0241c02b279f50*|
-    |US East (Ohio) (us-east-2)               |*ami-0c2e8d28b1f854c68*   |*ami-006a12f54eaafc2b1*|
-    |EU (Frankfurt) (eu-central-1)            |*ami-010caa98bae9a09e2*   |*ami-0d6f0554fd4743a9d*|
-    |EU (Stockholm) (eu-north-1)              |*ami-06ee67302ab7cf838*   |*ami-0b159b75*         |
-    |EU (Ireland) (eu-west-1)                 |*ami-01e08d22b9439c15a*   |*ami-097978e7acde1fd7c*|
-    |Asia Pacific (Tokyo) (ap-northeast-1)    |*ami-0f0e8066383e7a2cb*   |*ami-036b3969c5eb8d3cf*|
-    |Asia Pacific (Seoul) (ap-northeast-2)    |*ami-0b7baa90de70f683f*   |*ami-0b7f163f7194396f7*|
-    |Asia Pacific (Singapore) (ap-southeast-1)|*ami-019966ed970c18502*   |*ami-093f742654a955ee6*|
-    |Asia Pacific (Sydney) (ap-southeast-2)   |*ami-06ade0abbd8eca425*   |*ami-05e09575123ff498b*|
-
-    `Note`
-
-    The Amazon EKS worker node AMI is based on Amazon Linux 2. You can track security or privacy events for Amazon Linux 2 at the [Amazon Linux Security Center](https://alas.aws.amazon.com/alas2.html) or subscribe to the associated [RSS feed](https://alas.aws.amazon.com/AL2/alas.rss). Security and privacy events include an overview of the issue, what packages are affected, and how to update your instances to correct the issue.
+      > **NOTE**
+      >
+      > The Amazon EKS worker node AMI is based on Amazon Linux 2. You can track security or privacy events for Amazon Linux 2 at the [Amazon Linux Security Center](https://alas.aws.amazon.com/alas2.html) or subscribe to the associated [RSS feed](https://alas.aws.amazon.com/AL2/alas.rss). Security and privacy events include an overview of the issue, what packages are affected, and how to update your instances to correct the issue.
 
     * `KeyName`: Enter the name of an Amazon EC2 SSH key pair that you can use to connect using SSH into your worker nodes with after they launch.  You can either use the same SSH keypair you created for the build VM in an earlier step, or you can create one in the AWS Management Console. For more information, see [Amazon EC2 Key Pairs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the *Amazon EC2 User Guide for Linux Instances*.
 
-    `Note`
-
-    If you do not provide a keypair here, the AWS CloudFormation stack creation will fail.
+      > **NOTE**
+      >
+      > If you do not provide a keypair here, the AWS CloudFormation stack creation will fail.
 
     * `BootstrapArguments`: Specify any optional arguments to pass to the worker node bootstrap script, such as extra `kubelet` arguments. For more information, view the bootstrap script usage information at https://github.com/awslabs/amazon-eks-ami/blob/master/files/bootstrap.sh
     * `VpcId`: Enter the ID for the VPC that you created in [Create your Amazon EKS Cluster VPC](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#vpc-create).
@@ -943,22 +947,22 @@ Amazon EKS worker nodes are standard Amazon EC2 instance, and you are billed for
 
     b. Open the file with your favorite text editor. Replace the *<ARN of instance role (not instance profile)>* snippet with the `NodeInstanceRole` value that you recorded in the previous procedure, and save the file.
 
-    `Important`
-
-    Do not modify any other lines in this file.
-
-        apiVersion: v1
-        kind: ConfigMap
-        metadata:
-        name: aws-auth
-        namespace: kube-system
-        data:
-        mapRoles: |
-            - rolearn: <ARN of instance role (not instance profile)>
-            username: system:node:{{EC2PrivateDNSName}}
-            groups:
-                - system:bootstrappers
-                - system:nodes
+    > **Important**
+    >
+    > Do not modify any other lines in this file.
+    >
+    >     apiVersion: v1
+    >     kind: ConfigMap
+    >     metadata:
+    >     name: aws-auth
+    >     namespace: kube-system
+    >     data:
+    >     mapRoles: |
+    >         - rolearn: <ARN of instance role (not instance profile)>
+    >         username: system:node:{{EC2PrivateDNSName}}
+    >         groups:
+    >             - system:bootstrappers
+    >             - system:nodes
 
     c. Apply the configuration. This command may take a few minutes to finish.
 
@@ -966,9 +970,9 @@ Amazon EKS worker nodes are standard Amazon EC2 instance, and you are billed for
     kubectl apply -f aws-auth-cm.yaml
     ```
 
-    `Note`
-
-    If you receive the error `"aws-iam-authenticator": executable file not found in $PATH`, then your `kubectl` is not configured for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
+    > **NOTE**
+    >
+    > If you receive the error `"aws-iam-authenticator": executable file not found in $PATH`, then your `kubectl` is not configured for Amazon EKS. For more information, see [Installing aws-iam-authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html).
 
 2. Watch the status of your nodes and wait for them to reach the *Ready* status.
 
