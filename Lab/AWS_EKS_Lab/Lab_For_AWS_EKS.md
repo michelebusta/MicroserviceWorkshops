@@ -10,9 +10,9 @@ In this hands-on lab, you will assist with completing this POC with a subset of 
 
 Before you follow these instructions for the lab, you should have performed the setup steps at the workshop content repository here:
 
-[AWS EKS Lab Setup](../AWS_EKS_Lab_Setup/Lab_Setup_For_AWS_EKS.md)
+[AWS EKS Lab Setup](../../Lab_Setup/AWS_EKS_Lab_Setup/Lab_Setup_For_AWS_EKS.md)
 
-Each lab has individual setup steps for the environment. In step 6, you connect to the build agent.  Follow those instructions again at this time to open a command shell connected to that build agent and proceed to Exercise 1.
+Each lab has individual setup steps for the environment. In task 6, you connect to the build agent. Follow those instructions again at this time to open a command shell connected to that build agent and proceed to Exercise 2.
 
 ## Exercise 2: Create and run a Docker application
 
@@ -132,7 +132,7 @@ In this task, you will create a new `Dockerfile` that will be used to run the AP
     vi Dockerfile
     ```
 
-    ![[This is a screenshot of a new file named Dockerfile in the WSL window.](./images/task3step2.png)
+    ![This is a screenshot of a new file named Dockerfile in the WSL window.](./images/task3step2.png)
 
 3. Select `i` on your keyboard.  You'll see the bottom of the window showing `INSERT` mode.
 
@@ -289,7 +289,7 @@ The web application container will be calling endpoints exposed by the API appli
     docker network create fabmedical
     ```
 
-2. Create and start the `api`` application container with the following command.  The command does the following:
+2. Create and start the `api` application container with the following command.  The command does the following:
 
     - Names the container "api" for later reference with Docker commands.
 
@@ -300,7 +300,7 @@ The web application container will be calling endpoints exposed by the API appli
     - Creates a container from the specified image, by its tag, such as `content-api`.
 
     ```bash
-    docker run --name api --net fabmedical -p 3001:3001 content-api
+    docker run -d --name api --net fabmedical -p 3001:3001 content-api
     ```
 
 3. Enter the command to show running container.  You should observe that the `api` container is in the list.
@@ -365,8 +365,7 @@ In this task, you will configure the `web` container to communicate with the `ap
 4. Locate the following `TODO` item and modify the code to comment the first line and uncomment the second.  The result is that the `contentApiUrl` variable will be set to an environment variable.
 
     ```javascript
-    //TODO: Exercise 2 - Task 6 - Step 4
-
+    //TODO:
     //var contentApiUrl = "http://localhost:3001"
     var contentApiUrl = process.env.CONTENT_API_URL
     ```
@@ -715,7 +714,7 @@ In this task, you will deploy the API application to the Elastic Kubernetes Serv
 
     ![In the Advanced options dialog box, the above information has been entered.  At the bottom of the dialog bo is a **Deploy** button.](images/exercise3task2step3.png)
 
-4. Select **Deploy** to initiate the service deployment based on the imae.  This can take a few minutes.  In the meantime, you will be redirected to the **Overview** dashboard.  Select the `api` deployment from the **Overview** dashboard to see the deployment in progress.
+4. Select **Deploy** to initiate the service deployment based on the image. This can take a few minutes.  In the meantime, you will be redirected to the **Overview** dashboard.  Select the `api` deployment from the **Overview** dashboard to see the deployment in progress.
 
     ![This is a screenshot of the Kubernetes management dashboard.  Overview is highlighted on the left, and at right, a red arrow points to the api deployment.](images/exercise3task2step4.png)
 

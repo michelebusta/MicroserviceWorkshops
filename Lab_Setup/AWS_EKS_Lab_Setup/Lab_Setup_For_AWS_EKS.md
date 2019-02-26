@@ -612,9 +612,9 @@ You have multiple options to download and install `kubectl` for your operating s
 
         ```bash
         ubuntu@ip-172-31-60-76:~$ openssl dgst -sha256 aws-iam-authenticator
-          SHA256(aws-iam-authenticator)= a46c66eb14ad08204f2f588b32dc50b10e9a8a0cc48ddf0966596d3c07abe059
+        SHA256(aws-iam-authenticator)= a46c66eb14ad08204f2f588b32dc50b10e9a8a0cc48ddf0966596d3c07abe059
         ubuntu@ip-172-31-60-76:~$ cat aws-iam-authenticator.sha256
-          a46c66eb14ad08204f2f588b32dc50b10e9a8a0cc48ddf0966596d3c07abe059 aws-iam-authenticator
+        a46c66eb14ad08204f2f588b32dc50b10e9a8a0cc48ddf0966596d3c07abe059 aws-iam-authenticator
         ```
 
     * Compare the generated SHA-256 sum in the command output against your downloaded `aws-iam-authenticator.sha256` file. The two should match.
