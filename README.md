@@ -63,5 +63,4 @@ The goal is to show similar deployments of a simple web app / api to a container
 
 ## Bit.ly links to lab starter files
 
-ContosoEvents: http://bit.ly/2liKtvq
-FabMedical: http://bit.ly/2lWzQS2
+See lab setup steps for the correct starter files.
