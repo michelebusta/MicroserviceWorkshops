@@ -16,6 +16,20 @@ Relevant labs: Azure AKS, AWS AKS
 https://ndcporto.com/workshop/surviving-development-devops-and-production-with-docker-and-kubernetes
 
 -----
+ISSUES:
+
+```text
+#1 issue running content-web
+the problem is that the local machine has to have a higher version of node.js until the package.json is updated to fix that all packages are on the latest
+
+do the following workaround on your linux / ios machine:
+
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+
+```
+-----
 
 In ALL, there are 5 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
