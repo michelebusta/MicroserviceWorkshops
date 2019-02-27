@@ -238,7 +238,6 @@ In this task, you will create Docker images for the application - one for the AP
     docker build -t content-api .
     ```
 
-
 3. Once the image is successfully built, run the Docker images command again.  You will see two images - the `node` image and your container image (`content-api`).
 
     ```bash
@@ -498,10 +497,10 @@ In this task, you will push images to your DockerHub account, version images wit
 
 10. Run the following commands to pull an image from the repository.  Note that the default behavior is to pull images tagged with `latest`.  You can pull a specific version using the version tag.  Also, note that since the images already exist on the build agent, nothing is downloaded.
 
-```bash
-docker pull [DOCKERHUBACCOUNT]/content-web
-docker pull [DOCKERHUBACCOUNT]/content-web:v1
-```
+    ```bash
+    docker pull [DOCKERHUBACCOUNT]/content-web
+    docker pull [DOCKERHUBACCOUNT]/content-web:v1
+    ```
 
 ## Exercise 3: Deploy the solution to AWS Elastic Kubernetes Service
 
@@ -684,7 +683,7 @@ In this task, you will gather the information you need about your Elastic Kubern
 
     ![Kubernetes Dashboard Login](./images/exercise3task1step13.png)
 
-**Note**: It may take a few minutes before CPU and memory metric appear in the dashboard.
+> **Note**: It may take a few minutes before CPU and memory metric appear in the dashboard.
 
 ### Task 2: Deploy a service using the Kubernetes management dashboard
 
@@ -908,7 +907,7 @@ In this task, deploy the `web` service using `kubectl`.
 
 ### Task 4: Test the application in a browser
 
-In this task, you will verify that you can browsse to the `web` service you have deployed and view the speaker and session content information exposed by the `api` service.
+In this task, you will verify that you can browse to the `web` service you have deployed and view the speaker and session content information exposed by the `api` service.
 
 1. From the Kubernetes management dashboard, in the navigation menu, select the Services view under Discovery and Load Balancing.
 
@@ -1006,30 +1005,30 @@ In this task, you will try to increase the number of instances for the `api` ser
 
     - Add the following JSON snippet below the "name" property in the container spec:
 
-    ```json
-    "ports": [
-        {
-        "containerPort": 3001,
-        "hostPort": 3001
-        }
-    ],
-    ```
+      ```json
+      "ports": [
+          {
+            "containerPort": 3001,
+            "hostPort": 3001
+          }
+      ],
+      ```
 
     - Your container spec should now look like this:
 
-    ![Screenshot of the deployment JSON code, with the \$.spec.template.spec.containers\[0\] section highlighted, showing the updated values for containerPort and hostPost, both set to port 3001.](images/exercise4task2step6.png)
+      ![Screenshot of the deployment JSON code, with the \$.spec.template.spec.containers\[0\] section highlighted, showing the updated values for containerPort and hostPost, both set to port 3001.](images/exercise4task2step6.png)
 
 7. Copy the updated JSON document from notepad into the clipboard. Return to the Kubernetes dashboard, which should still be viewing the `api` deployment.
 
     - Select **Edit**.
 
-    ![In the **Workloads \> Deployments \> api** bar, the **Edit** icon is highlighted.](images/exercise4task2step7.png)
+      ![In the **Workloads \> Deployments \> api** bar, the **Edit** icon is highlighted.](images/exercise4task2step7.png)
 
     - Paste the updated JSON document.
 
     - Select **Update**.
 
-    ![**UPDATE** is highlighted in the **Edit a Deployment** dialog box.](images/exercise4task2step7_2.png)
+      ![**UPDATE** is highlighted in the **Edit a Deployment** dialog box.](images/exercise4task2step7_2.png)
 
 8. From the `api` deployment view, select **Scale**.
 

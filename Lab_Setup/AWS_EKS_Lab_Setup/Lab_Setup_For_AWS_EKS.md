@@ -402,38 +402,42 @@ In this task, you will update the packages and install Docker engine.
 
     `sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"`
 
-5. Update the Ubuntu packages and install Docker engine, node.js and the node package manager in a single step by typing the following in a single line command. When asked if you would like to proceed, respond by typing “y” and pressing enter.
+5. Add and setup Node.js v8.x repository.
 
-    `sudo apt-get update && sudo apt install docker-ce nodejs npm`
+    `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
 
-6. Now, upgrade the Ubuntu packages to the latest version by typing the following in a single line command. When asked if you would like to proceed, respond by typing “y” and pressing enter.
+6. Update the Ubuntu packages and install Docker engine, node.js and the node package manager in a single step by typing the following in a single line command. When asked if you would like to proceed, respond by typing “y” and pressing enter.
+
+    `sudo apt-get update && sudo apt install docker-ce nodejs`
+
+7. Now, upgrade the Ubuntu packages to the latest version by typing the following in a single line command. When asked if you would like to proceed, respond by typing “y” and pressing enter.
 
     `sudo apt-get upgrade`
 
-7. When the command has completed, check the Docker version installed by executing this command. The output may look something like that shown in the following screen shot. Note that the server version is not shown yet, because you didn’t run the command with elevated privileges (to be addressed shortly).
+8. When the command has completed, check the Docker version installed by executing this command. The output may look something like that shown in the following screen shot. Note that the server version is not shown yet, because you didn’t run the command with elevated privileges (to be addressed shortly).
 
     `docker version`
 
     ![WSL](images/ex0-task8-image_01.png)
 
-8. You may check the versions of node.js and npm as well, just for information purposes, using these commands.
+9.  You may check the versions of node.js and npm as well, just for information purposes, using these commands.
 
     `nodejs --version`
 
     `npm -version`
 
-9. Add your user to the Docker group so that you do not have to elevate privileges with sudo for every command. You can ignore any errors you see in the output.
+10. Add your user to the Docker group so that you do not have to elevate privileges with sudo for every command. You can ignore any errors you see in the output.
 
     `sudo usermod -aG docker $USER`
 
     ![WSL](images/ex0-task8-image_02.png)
 
-10. In order for the user permission changes to take effect, exit the SSH session by typing ‘exit’, then press \<Enter>. Repeat the commands in Task 6: Connect securely to the build agent from step 3 to establish the SSH session again.
-11. Run the Docker version command again, and note the output now shows the server version as well.
+11. In order for the user permission changes to take effect, exit the SSH session by typing ‘exit’, then press \<Enter>. Repeat the commands in Task 6: Connect securely to the build agent from step 3 to establish the SSH session again.
+12. Run the Docker version command again, and note the output now shows the server version as well.
 
     ![WSL](images/ex0-task8-image_03.png)
 
-12. Run a few Docker commands.
+13. Run a few Docker commands.
 
     * One to see if there are any containers presently running
 
@@ -443,7 +447,7 @@ In this task, you will update the packages and install Docker engine.
 
         `docker container ls -a`
 
-13. In both cases, you will have an empty list but no errors running the command. Your build agent is ready with Docker engine running properly.
+14. In both cases, you will have an empty list but no errors running the command. Your build agent is ready with Docker engine running properly.
 
     ![WSL](images/ex0-task8-image_04.png)
 
