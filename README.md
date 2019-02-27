@@ -20,12 +20,12 @@ ISSUES:
 
 ```text
 #1 issue running content-web
-Change the Dockerfile base image to use node:8 instead of node:alpine
+Change the Dockerfile base image to use node:8 instead of node:argon
 
 ```
 -----
 
-In ALL, there are 5 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :) 
+In ALL, there are 5 different versions of the same lab. You have to choose a platform to focus on for the workshop since you clearly can't do all of them :)
 The idea is to give you a choice of platform you are most interested in during the class period but you may optionally do the rest later.
 
 > NOTE: these labs are maintained based on demand for workshops so some may be more current than others, be aware that the steps do change and screenshots become out of date. Any lab actively delivered in a workshop, is up to date before that workshop :)
@@ -34,14 +34,14 @@ The idea is to give you a choice of platform you are most interested in during t
 
 You should follow the setup steps in this folder to set up your environment. When the workshop is fully hands-on you want to do this BEFORE the workshop. Sometimes the labs are used for your own time given the content that needs to be covered.
 
-Each workshop focuses on different platforms, and this will be indicated in the workshop link so that you know which labs to choose from. I check the relevant labs before a hands on workshop so the pace of "update" depends on the workshop activity. I keep each workshop indicating it's last "review" date. 
+Each workshop focuses on different platforms, and this will be indicated in the workshop link so that you know which labs to choose from. I check the relevant labs before a hands on workshop so the pace of "update" depends on the workshop activity. I keep each workshop indicating it's last "review" date.
 
 You'll choose from the following environments:
 
 * Azure Container Service (AKS) with Kubernetes
 * AWS with EKS
 * AWS with EC2 Container Services
-* Google Cloud with Google Container Engine 
+* Google Cloud with Google Container Engine
 * Azure Container Service with DC / OS
 * Azure Service Fabric
 * Azure with Docker Enterprise Edition (COMING SOON)
@@ -53,7 +53,7 @@ You'll choose from the following environments:
 You must have the setup steps in this folder completed before the lab period if you want to be productive during lab time.
 
 Also, during the lab period, you will be given access to the actual lab instructions to follow.
-You must follow the steps EXACTLY as written to avoid running into issues during lab time. 
+You must follow the steps EXACTLY as written to avoid running into issues during lab time.
 
 ## Lab goals
 

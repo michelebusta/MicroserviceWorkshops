@@ -10,9 +10,9 @@ In this hands-on lab, you will assist with completing this POC with a subset of 
 
 Before you follow these instructions for the lab, you should have performed the setup steps at the workshop content repository here:
 
-[AWS EKS Lab Setup](../AWS_EKS_Lab_Setup/Lab_Setup_For_AWS_EKS.md)
+[AWS EKS Lab Setup](../../Lab_Setup/AWS_EKS_Lab_Setup/Lab_Setup_For_AWS_EKS.md)
 
-Each lab has individual setup steps for the environment. In step 6, you connect to the build agent.  Follow those instructions again at this time to open a command shell connected to that build agent and proceed to Exercise 1.
+Each lab has individual setup steps for the environment. In task 6, you connect to the build agent. Follow those instructions again at this time to open a command shell connected to that build agent and proceed to Exercise 2.
 
 ## Exercise 2: Create and run a Docker application
 
@@ -132,7 +132,7 @@ In this task, you will create a new `Dockerfile` that will be used to run the AP
     vi Dockerfile
     ```
 
-    ![[This is a screenshot of a new file named Dockerfile in the WSL window.](./images/task3step2.png)
+    ![This is a screenshot of a new file named Dockerfile in the WSL window.](./images/task3step2.png)
 
 3. Select `i` on your keyboard.  You'll see the bottom of the window showing `INSERT` mode.
 
@@ -238,7 +238,6 @@ In this task, you will create Docker images for the application - one for the AP
     docker build -t content-api .
     ```
 
-
 3. Once the image is successfully built, run the Docker images command again.  You will see two images - the `node` image and your container image (`content-api`).
 
     ```bash
@@ -289,7 +288,7 @@ The web application container will be calling endpoints exposed by the API appli
     docker network create fabmedical
     ```
 
-2. Create and start the `api`` application container with the following command.  The command does the following:
+2. Create and start the `api` application container with the following command.  The command does the following:
 
     - Names the container "api" for later reference with Docker commands.
 
@@ -300,7 +299,7 @@ The web application container will be calling endpoints exposed by the API appli
     - Creates a container from the specified image, by its tag, such as `content-api`.
 
     ```bash
-    docker run --name api --net fabmedical -p 3001:3001 content-api
+    docker run -d --name api --net fabmedical -p 3001:3001 content-api
     ```
 
 3. Enter the command to show running container.  You should observe that the `api` container is in the list.
@@ -365,8 +364,7 @@ In this task, you will configure the `web` container to communicate with the `ap
 4. Locate the following `TODO` item and modify the code to comment the first line and uncomment the second.  The result is that the `contentApiUrl` variable will be set to an environment variable.
 
     ```javascript
-    //TODO: Exercise 2 - Task 6 - Step 4
-
+    //TODO:
     //var contentApiUrl = "http://localhost:3001"
     var contentApiUrl = process.env.CONTENT_API_URL
     ```
@@ -499,10 +497,10 @@ In this task, you will push images to your DockerHub account, version images wit
 
 10. Run the following commands to pull an image from the repository.  Note that the default behavior is to pull images tagged with `latest`.  You can pull a specific version using the version tag.  Also, note that since the images already exist on the build agent, nothing is downloaded.
 
-```bash
-docker pull [DOCKERHUBACCOUNT]/content-web
-docker pull [DOCKERHUBACCOUNT]/content-web:v1
-```
+    ```bash
+    docker pull [DOCKERHUBACCOUNT]/content-web
+    docker pull [DOCKERHUBACCOUNT]/content-web:v1
+    ```
 
 ## Exercise 3: Deploy the solution to AWS Elastic Kubernetes Service
 
@@ -685,7 +683,7 @@ In this task, you will gather the information you need about your Elastic Kubern
 
     ![Kubernetes Dashboard Login](./images/exercise3task1step13.png)
 
-**Note**: It may take a few minutes before CPU and memory metric appear in the dashboard.
+> **Note**: It may take a few minutes before CPU and memory metric appear in the dashboard.
 
 ### Task 2: Deploy a service using the Kubernetes management dashboard
 
@@ -715,7 +713,7 @@ In this task, you will deploy the API application to the Elastic Kubernetes Serv
 
     ![In the Advanced options dialog box, the above information has been entered.  At the bottom of the dialog bo is a **Deploy** button.](images/exercise3task2step3.png)
 
-4. Select **Deploy** to initiate the service deployment based on the imae.  This can take a few minutes.  In the meantime, you will be redirected to the **Overview** dashboard.  Select the `api` deployment from the **Overview** dashboard to see the deployment in progress.
+4. Select **Deploy** to initiate the service deployment based on the image. This can take a few minutes.  In the meantime, you will be redirected to the **Overview** dashboard.  Select the `api` deployment from the **Overview** dashboard to see the deployment in progress.
 
     ![This is a screenshot of the Kubernetes management dashboard.  Overview is highlighted on the left, and at right, a red arrow points to the api deployment.](images/exercise3task2step4.png)
 
@@ -909,7 +907,7 @@ In this task, deploy the `web` service using `kubectl`.
 
 ### Task 4: Test the application in a browser
 
-In this task, you will verify that you can browsse to the `web` service you have deployed and view the speaker and session content information exposed by the `api` service.
+In this task, you will verify that you can browse to the `web` service you have deployed and view the speaker and session content information exposed by the `api` service.
 
 1. From the Kubernetes management dashboard, in the navigation menu, select the Services view under Discovery and Load Balancing.
 
@@ -1007,30 +1005,30 @@ In this task, you will try to increase the number of instances for the `api` ser
 
     - Add the following JSON snippet below the "name" property in the container spec:
 
-    ```json
-    "ports": [
-        {
-        "containerPort": 3001,
-        "hostPort": 3001
-        }
-    ],
-    ```
+      ```json
+      "ports": [
+          {
+            "containerPort": 3001,
+            "hostPort": 3001
+          }
+      ],
+      ```
 
     - Your container spec should now look like this:
 
-    ![Screenshot of the deployment JSON code, with the \$.spec.template.spec.containers\[0\] section highlighted, showing the updated values for containerPort and hostPost, both set to port 3001.](images/exercise4task2step6.png)
+      ![Screenshot of the deployment JSON code, with the \$.spec.template.spec.containers\[0\] section highlighted, showing the updated values for containerPort and hostPost, both set to port 3001.](images/exercise4task2step6.png)
 
 7. Copy the updated JSON document from notepad into the clipboard. Return to the Kubernetes dashboard, which should still be viewing the `api` deployment.
 
     - Select **Edit**.
 
-    ![In the **Workloads \> Deployments \> api** bar, the **Edit** icon is highlighted.](images/exercise4task2step7.png)
+      ![In the **Workloads \> Deployments \> api** bar, the **Edit** icon is highlighted.](images/exercise4task2step7.png)
 
     - Paste the updated JSON document.
 
     - Select **Update**.
 
-    ![**UPDATE** is highlighted in the **Edit a Deployment** dialog box.](images/exercise4task2step7_2.png)
+      ![**UPDATE** is highlighted in the **Edit a Deployment** dialog box.](images/exercise4task2step7_2.png)
 
 8. From the `api` deployment view, select **Scale**.
 
