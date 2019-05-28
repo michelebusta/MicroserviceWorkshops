@@ -1,0 +1,76 @@
+﻿@model IdentityManagementWeb.Models.UserStatus
+@{
+    ViewData["Title"] = "Home";
+}
+<h1>Identity Messaging Test Harness</h1>
+<div>
+    @if (Model.HasUserName)
+    {
+        <div>
+            <h3>Verify Email</h3>
+            <form asp-controller="Home" asp-action="VerifyEmail">
+                <input asp-for="UserName" type="hidden" />
+                <label for="token">Verification token:<input id="token" name="token" type="text" /></label>
+                <input type="submit" value="Verify Email" />
+            </form>
+        </div>
+        <div>
+            <h3>Log in</h3>
+            <form asp-controller="Home" asp-action="Login">
+                <input asp-for="UserName" type="hidden" />
+                <input type="submit" value="LogIn" />
+            </form>
+        </div>
+
+        <div>
+            <h3>Log out</h3>
+            <form asp-controller="Home" asp-action="Logout">
+                <input asp-for="UserName" type="hidden" />
+                <input type="submit" value="Logout" />
+            </form>
+        </div>
+
+        <div>
+            <h3>Login Failed</h3>
+            <form asp-controller="Home" asp-action="LoginFailed">
+                <input asp-for="UserName" type="hidden" />
+                <label for="numberOfAttempts">Number of attempts:<input id="numberOfAttempts" name="numberOfAttempts" type="number" /></label>
+                <input type="submit" value="Login Failed" />
+            </form>
+        </div>
+        <div>
+            <h3>Lock account</h3>
+            <form asp-controller="Home" asp-action="LockAccount">
+                <input asp-for="UserName" type="hidden" />
+                <input type="submit" value="Lock account" />
+            </form>
+        </div>
+
+        <div>
+            <h3>Unlock account</h3>
+            <form asp-controller="Home" asp-action="UnlockAccount">
+                <input asp-for="UserName" type="hidden" />
+                <input type="submit" value="Unlock account" />
+            </form>
+        </div>
+
+        <div>
+            <h3>Password Reset</h3>
+            <form asp-controller="Home" asp-action="ResetPassword">
+                <input asp-for="UserName" type="hidden" />
+                <input type="submit" value="Reset password" />
+            </form>
+        </div>
+    }
+    else
+    {
+        <form asp-controller="Home" asp-action="CreateUser">
+            <div>
+                <label for="username">UserName: <input id="username" name="userName" type="text" required="required" /></label>
+            </div>
+            <div><label for="password">Password: <input id="password" name="password" type="password" required="required" /></label></div>
+            <div><label for="email">Email: <input id="email" name="email" type="email" required="required" /></label></div>
+            <div><input type="submit" value="Create User" /></div>
+        </form>
+    }
+</div>

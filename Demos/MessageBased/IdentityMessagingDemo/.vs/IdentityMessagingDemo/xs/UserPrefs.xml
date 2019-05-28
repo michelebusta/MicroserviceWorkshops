@@ -1,0 +1,28 @@
+﻿<Properties StartupConfiguration="{CDF8B8AB-3885-48C2-B5EC-0113D7D98320}|Default">
+  <MonoDevelop.Ide.ItemProperties.src.IdentityRuntimeConsumer PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="src/IdentityHistoryConsumer/appsettings.json">
+    <Files>
+      <File FileName="src/IdentityHistoryConsumer/appsettings.json" Line="25" Column="9" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="IdentityMessagingDemo" expanded="True">
+            <Node name="src" expanded="True">
+              <Node name="IdentityHistoryConsumer" expanded="True">
+                <Node name="appsettings.json" selected="True" />
+              </Node>
+              <Node name="IdentityRuntimeConsumer" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
