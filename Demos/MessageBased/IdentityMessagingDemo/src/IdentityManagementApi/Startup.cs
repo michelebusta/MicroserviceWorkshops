@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,10 +22,11 @@ namespace IdentityManagementApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var options = new DocDbConfigurationOptions(_configuration.GetSection("docdb"));
-            new IdentityManagementStore(options).Initialize().Wait();
-            services.AddSingleton(options);
-            services.AddTransient<IIdentityManagementStore, IdentityManagementStore>();
+            var loggerFactory = new LoggerFactory();
+            var logger = loggerFactory.CreateLogger(typeof(Startup));
+
+            services.AddIdentityManagementStore(logger, _configuration);
+
             services.AddMvc();
             services.AddMvcCore().AddJsonFormatters();
         }

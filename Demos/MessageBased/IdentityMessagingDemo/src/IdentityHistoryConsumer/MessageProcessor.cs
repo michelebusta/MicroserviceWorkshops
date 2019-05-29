@@ -8,12 +8,12 @@ namespace IdentityHistoryConsumer
 {
     class MessageProcessor
     {
-        private readonly DocDbConfigurationOptions _options;
+        private readonly IIdentityManagementStore _store;
         private readonly ILogger _logger;
 
-        public MessageProcessor(DocDbConfigurationOptions options, ILogger logger)
+        public MessageProcessor(IIdentityManagementStore store, ILogger logger)
         {
-            _options = options;
+            _store = store;
             _logger = logger;
         }
 
@@ -24,8 +24,7 @@ namespace IdentityHistoryConsumer
                 _logger.LogInformation("Processing message {0}", type);
                 if (type == "TopicCheck") return;
                 message["__messageType"] = type;
-                var store = new IdentityHistoryStore(_options);
-                await store.Insert(message);
+                await _store.Create(message);
             }
             catch (Exception ex)
             {
@@ -35,8 +34,6 @@ namespace IdentityHistoryConsumer
         }
 
         public void Initialize()
-        {
-            new IdentityHistoryStore(_options).Initialize().Wait();
-        }
+        { }
     }
 }

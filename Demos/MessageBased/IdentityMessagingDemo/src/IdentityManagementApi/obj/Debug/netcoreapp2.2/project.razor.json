@@ -1,0 +1,18 @@
+{
+  "FilePath": "/Users/michelebusta/repos/snap/Demos/events-messaging/IdentityMessagingDemo/src/IdentityManagementApi/IdentityManagementApi.csproj",
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 703
+  },
+  "RootNamespace": "IdentityManagementApi",
+  "Documents": []
+}

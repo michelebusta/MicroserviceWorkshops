@@ -1,32 +1,37 @@
-﻿using System;
+﻿using Microsoft.Azure.Documents;
+using Microsoft.Azure.Documents.Client;
+using Newtonsoft.Json.Linq;
+using System;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Azure.Documents;
-using Microsoft.Azure.Documents.Client;
 
-namespace Shared.Storage
+namespace Shared.Storage.Cosmos
 {
-    public class IdentityManagementStore : IIdentityManagementStore
+    public class CosmosIdentityManagementStore : IIdentityManagementStore
     {
         private readonly string _database;
         private readonly string _collection;
         private readonly DocumentClient _client;
 
-        public IdentityManagementStore(DocDbConfigurationOptions options)
+        public CosmosIdentityManagementStore(CosmosConfig options)
         {
             _database = options.Database;
             _collection = options.Collection;
-            _client = new DocumentClient(options.ServiceEndpoint, options.Key);
+            _client = new DocumentClient(new Uri(options.ServiceEndpoint), options.AuthKey);
+
+            Initialize().Wait();
         }
 
-        public async Task Initialize()
+        private async Task Initialize()
         {
-            await _client.CreateDatabaseIfNotExistsAsync(new Database() {Id = _database});
+            await _client.CreateDatabaseIfNotExistsAsync(new Database() { Id = _database });
             await
                 _client.CreateDocumentCollectionIfNotExistsAsync(
                     UriFactory.CreateDatabaseUri(_database),
-                    new DocumentCollection() {Id = _collection});
+                    new DocumentCollection() { Id = _collection });
         }
 
         public async Task<string> Create(PasswordUser user)
@@ -50,6 +55,17 @@ namespace Shared.Storage
             }
         }
 
+        public async Task Create(JObject data)
+        {
+            var bytes = Encoding.UTF8.GetBytes(data.ToString());
+            using (var ms = new MemoryStream(bytes))
+            {
+                await _client.CreateDocumentAsync(
+                   UriFactory.CreateDocumentCollectionUri(_database, _collection),
+                   JsonSerializable.LoadFrom<Document>(ms));
+            }
+        }
+
         private Uri MakeDocumentUri(Guid id)
         {
             return UriFactory.CreateDocumentUri(_database, _collection, id.ToString("D"));
@@ -65,13 +81,12 @@ namespace Shared.Storage
             var options = new FeedOptions();
             options.EnableCrossPartitionQuery = true;
             var query = _client.CreateDocumentQuery<PasswordUser>(UriFactory.CreateDocumentCollectionUri(_database, _collection), options);
-            
+
             var result = query
                 .Where(x => x.Id == id)
                 .ToList()
                 .SingleOrDefault();
             return Task.FromResult(result);
-
         }
     }
 }

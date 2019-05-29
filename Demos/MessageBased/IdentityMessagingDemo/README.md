@@ -7,6 +7,11 @@ This demo illustrates how to send messages to a variety of targets including:
 * Azure Service Bus for a deployed scenario
 * Azure Event Hubs for a deployed scenario
 
+This demo also illustrates how to store information in a variety of document databases including:
+
+* Postgres in a local Docker container
+* Azure Cosmos DB for a deployed scenario
+
 The goal is to illustrate how you can locally test end-to-end without Azure resources and offline, while flipping to Azure resources of equivalent capabilities. This sample does not provide a production ready provider pattern that would be desirable for real product code to completely remove any test / local equivalents while using Azure in the deployed environments. This simply illustrates the coding patterns to show how each technology works in its simplest form.
 
 ## Azure Setup
@@ -95,10 +100,16 @@ To configure the access to the document database, make use of the following entr
 
 | Name | Example | Description |
 | - | - | - |
-| docdb:serviceEndpoint | https://example.documents.azure.com:443/ | The endpoint hold by `{$COSMOS_URI}` |
-| docdb:authKeyOrResourceToken | NiHYb4iTWD(...)DbXWCxaFnTKQ== | The access key hold by `{$COSMOS_KEY}` |
-| docdb:database | IdentityMessagingDemo | The name of the database |
-| docdb:collection | Management | The name of the collection to use in the database |
+| DocumentDbConfig:DbBackend | Marten | There are two valid values: `Marten` and `CosmosDb` |
+| DocumentDbConfig:CosmosConfig:ServiceEndpoint | https://example.documents.azure.com:443/ | The Cosmos DB endpoint hold by `{$COSMOS_URI}` |
+| DocumentDbConfig:CosmosConfig:AuthKey | NiHYb4iTWD(...)DbXWCxaFnTKQ== | The Cosmos DB access key hold by `{$COSMOS_KEY}` |
+| DocumentDbConfig:CosmosConfig:Database | IdentityMessagingDemo | The name of the Cosmos DB database |
+| DocumentDbConfig:CosmosConfig:Collection | Management | The name of the collection to use in the Cosmos DB database |
+| DocumentDbConfig:MartenConfig:UserId | postgres | The Postgres user id |
+| DocumentDbConfig:MartenConfig:Password | Password1 | The Postgres user password |
+| DocumentDbConfig:MartenConfig:Host | localhost | The hostname of the Postgres instance |
+| DocumentDbConfig:MartenConfig:Port | 5432 | The port number of the Postgres instance |
+| DocumentDbConfig:MartenConfig:Database | Management | The name of the Postgres database |
 
 ### IdentityManagementWeb
 
@@ -137,10 +148,16 @@ To configure the access to the document database, make use of the following entr
 
 | Name | Example | Description |
 | - | - | - |
-| docdb:serviceEndpoint | https://example.documents.azure.com:443/ | The endpoint hold by `{$COSMOS_URI}` |
-| docdb:authKeyOrResourceToken | NiHYb4iTWD(...)DbXWCxaFnTKQ== | The access key hold by `{$COSMOS_KEY}` |
-| docdb:database | IdentityMessagingDemo | The name of the database |
-| docdb:collection | History | The name of the collection to use in the database |
+| DocumentDbConfig:DbBackend | Marten | There are two valid values: `Marten` and `CosmosDb` |
+| DocumentDbConfig:CosmosConfig:ServiceEndpoint | https://example.documents.azure.com:443/ | The Cosmos DB endpoint hold by `{$COSMOS_URI}` |
+| DocumentDbConfig:CosmosConfig:AuthKey | NiHYb4iTWD(...)DbXWCxaFnTKQ== | The Cosmos DB access key hold by `{$COSMOS_KEY}` |
+| DocumentDbConfig:CosmosConfig:Database | IdentityMessagingDemo | The name of the Cosmos DB database |
+| DocumentDbConfig:CosmosConfig:Collection | History | The name of the collection to use in the Cosmos DB database |
+| DocumentDbConfig:MartenConfig:UserId | postgres | The Postgres user id |
+| DocumentDbConfig:MartenConfig:Password | Password1 | The Postgres user password |
+| DocumentDbConfig:MartenConfig:Host | localhost | The hostname of the Postgres instance |
+| DocumentDbConfig:MartenConfig:Port | 5432 | The port number of the Postgres instance |
+| DocumentDbConfig:MartenConfig:Database | History | The name of the Postgres database |
 
 To configure the access to the **RabbitMQ** instance, make use of the following entries:
 

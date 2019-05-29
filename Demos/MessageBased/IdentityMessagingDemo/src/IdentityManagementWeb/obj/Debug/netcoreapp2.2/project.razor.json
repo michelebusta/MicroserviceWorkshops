@@ -1,0 +1,44 @@
+{
+  "FilePath": "/Users/michelebusta/repos/snap/Demos/events-messaging/IdentityMessagingDemo/src/IdentityManagementWeb/IdentityManagementWeb.csproj",
+  "Configuration": {
+    "ConfigurationName": "MVC-2.1",
+    "LanguageVersion": "2.1",
+    "Extensions": [
+      {
+        "ExtensionName": "MVC-2.1"
+      }
+    ]
+  },
+  "ProjectWorkspaceState": {
+    "TagHelpers": [],
+    "CSharpLanguageVersion": 703
+  },
+  "RootNamespace": "IdentityManagementWeb",
+  "Documents": [
+    {
+      "FilePath": "Views/Home/Index.cshtml",
+      "TargetPath": "Views/Home/Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Shared/Error.cshtml",
+      "TargetPath": "Views/Shared/Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/_ViewImports.cshtml",
+      "TargetPath": "Views/_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/_ViewStart.cshtml",
+      "TargetPath": "Views/_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "Views/Shared/_Layout.cshtml",
+      "TargetPath": "Views/Shared/_Layout.cshtml",
+      "FileKind": "mvc"
+    }
+  ]
+}

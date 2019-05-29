@@ -1,16 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Shared.EventHubs;
-using Shared.ServiceBus;
 using Shared.Kafka;
 using Shared.Messages;
+using Shared.RabbitMQ;
+using Shared.ServiceBus;
 using Shared.Storage;
+using Shared.Storage.Cosmos;
+using Shared.Storage.Marten;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.Azure.ServiceBus;
-using Shared.RabbitMQ;
 
 namespace IdentityHistoryConsumer
 {
@@ -36,8 +38,25 @@ namespace IdentityHistoryConsumer
 
             logger.LogInformation("Starting up");
 
-            var options = new DocDbConfigurationOptions(configuration.GetSection("docdb"));
-            var processor = new MessageProcessor(options, logger);
+            var options = configuration.GetSection(nameof(DocumentDbConfig)).Get<DocumentDbConfig>();
+
+            logger.LogInformation("Using DB backend {dbBackend}", options.DbBackend);
+            IIdentityManagementStore identityManagementStore;
+            switch (options.DbBackend)
+            {
+                case DbBackend.CosmosDb:
+                    logger.LogInformation("Using Cosmos with config: {config}", JsonConvert.SerializeObject(options.CosmosConfig, Formatting.Indented));
+                    identityManagementStore = new CosmosIdentityManagementStore(options.CosmosConfig);
+                    break;
+
+                case DbBackend.Marten:
+                default:
+                    logger.LogInformation("Using Marten with config: {config}", JsonConvert.SerializeObject(options.MartenConfig, Formatting.Indented));
+                    identityManagementStore = new MartenIdentityManagementStore(options.MartenConfig);
+                    break;
+            }
+
+            var processor = new MessageProcessor(identityManagementStore, logger);
             processor.Initialize();
 
             if (string.Equals(configuration["EventsSystem"], "servicebus", StringComparison.CurrentCultureIgnoreCase))
