@@ -5,10 +5,7 @@
 
 ## Hands on Lab Steps
 
-UPDATE: the location below from Microsoft is not currently up to date since there have been UI changes, please follow this one for now; an update from our team at Solliance: 
-https://github.com/jamesrcounts/MCW-Containers-and-DevOps
-
-IGNORE FOR NOW: See the instructions at this location:
+See the instructions at this location:
 [MCW - Containers and DevOps Lab](https://github.com/Microsoft/MCW-Containers-and-DevOps)
 
 Setup steps are at:
