@@ -1,6 +1,6 @@
 # Azure Container Service (AKS) Lab Setup
 
-> LAST UPDATED: 2/14/2019
+> LAST UPDATED: May 2019
 > NOTE this lab is now a public lab maintained by Microsoft
 
 ## Set up Azure Account
