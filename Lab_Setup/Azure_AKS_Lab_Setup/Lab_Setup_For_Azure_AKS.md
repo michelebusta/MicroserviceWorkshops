@@ -1,6 +1,6 @@
 # Azure Container Service (AKS) Lab Setup
 
-> LAST UPDATED: May 2019
+> LAST UPDATED: October 2019
 > NOTE this lab is now a public lab maintained by Microsoft
 > Our Solliance team is actively involved in those updates
 
