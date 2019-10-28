@@ -15,6 +15,9 @@ Relevant labs: Azure AKS
 
 https://azureaiconf.com/#!/speaker/Michele%20Leroux%20Bustamante/1011
 
+Lab Setup Steps
+https://github.com/michelebusta/MicroserviceWorkshops/blob/master/Lab_Setup/Azure_AKS_Lab_Setup/Lab_Setup_For_Azure_AKS.md
+
 -----
 
 > REGISTRATION:
