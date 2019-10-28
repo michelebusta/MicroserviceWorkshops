@@ -1,7 +1,8 @@
 # Azure Container Service (AKS) Lab Setup
 
-> LAST UPDATED: May 2019
+> LAST UPDATED: Oct 2019
 > NOTE this lab is now a public lab maintained by Microsoft
+> Our Solliance team is actively involved in those updates
 
 ## Set up Azure Account
 
@@ -12,7 +13,7 @@ https://azure.microsoft.com/en-us/free/
 ## Hands on Lab Steps
 
 See the instructions at this location:
-[MCW - Containers and DevOps Lab](https://github.com/Microsoft/MCW-Containers-and-DevOps)
+[MCW - Cloud Native Applications](https://github.com/microsoft/MCW-Cloud-native-applications)
 
 Setup steps are at:
-[Hands on Lab Steps](https://github.com/microsoft/MCW-Containers-and-DevOps/blob/master/Hands-on%20lab/Before%20the%20HOL%20-%20Containers%20and%20DevOps.md)
+[Hands on Lab Steps](https://github.com/microsoft/MCW-Cloud-native-applications/blob/master/Hands-on%20lab/Before%20the%20HOL%20-%20Cloud-native%20applications.md)
