@@ -7,6 +7,7 @@ If you are just looking to learn how to set up an environment on any of the belo
 
 ```text
 November 17 and 18, 2019
+Azure / AI Conference (co-located with DEVintersection)
 2-day workshop
 ASP.NET Core, Docker on Azure and Azure Kubernetes Service - what you need to know
 NOTE: there is limited time for hands on in the workshop but the labs are there to get started with.
