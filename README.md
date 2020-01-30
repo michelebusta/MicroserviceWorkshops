@@ -6,25 +6,12 @@ If you are just looking to learn how to set up an environment on any of the belo
 > UPCOMING WORKSHOPS:
 
 ```text
-November 17 and 18, 2019
-Azure / AI Conference (co-located with DEVintersection)
-2-day workshop
-ASP.NET Core, Docker on Azure and Azure Kubernetes Service - what you need to know
-NOTE: there is limited time for hands on in the workshop but the labs are there to get started with.
-Relevant labs: Azure AKS
+Updates in progress...planning for Fall 2020
 ```
-
-https://azureaiconf.com/#!/speaker/Michele%20Leroux%20Bustamante/1011
-
 Lab Setup Steps
 https://github.com/michelebusta/MicroserviceWorkshops/blob/master/Lab_Setup/Azure_AKS_Lab_Setup/Lab_Setup_For_Azure_AKS.md
 
 -----
-
-> REGISTRATION:
-
-If you haven't registered, when you sign up use SOLLIANCE for the discount code and you'll get $100 off.
-https://azureaiconf.com/#!/register
 
 > OVERVIEW:
 
